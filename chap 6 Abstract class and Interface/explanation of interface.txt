@@ -1,0 +1,624 @@
+/*
+Interface:
+Interface is a fully abstract class.
+So interface contains only abstract member methods. All the member methods of interface are by default public and abstract. So even if we dont use the public and abstract keywords for the member methods of interface they are declared as public and abstract by java compiler.
+
+e.g.
+interface I1
+{
+	void display1();
+	public void display2();
+	abstract void display3();
+	public abstract void display4();
+
+}
+
+here we have not used the public and abstract keywords for display1() member method of interface I1. yet at compile time the java compiler inserts the missing keuywords  out of public and abstract for display1(). AT compile time java compiler will insert the missing keyword abstract for display2() member method and the public missing keyword for display3() member method.
+
+
+So interface can be called as a contract between the service provider and client where the service provider provides only an abstract list of services to client but how these services are to be implemented is hidden from the client.
+
+The main use of interface are:
+1. the interface hides the implementation details of services from client by providing only an abstract list of services of the application to the client. So this improves security of application.
+2. interface helps to improve flexibility of the application because now new services can be added or removed easily from application just by removing their abstract declaration from interface.
+3. interface helps 2 different systems to communicate using each other using a common interface.
+
+
+e.g. ATM is an interface between bank customer and client.
+
+
+
+RULE:
+The data members of interface are automatically considered as public, static and final data members. So even if the programmer has not declared the data members of interface using any or all of the keywords out of public, static and final the java compiler automatically inserts the missing keywords out of public static and final for data members of interface.
+
+e.g. 
+interface I1
+{
+	int m=5;
+	static float n=7.8f;
+	public double n1=9.8;
+	public static final char ch='d';
+	final byte v1=10;
+
+
+}
+
+here the java compiler automatically inserts missing keywords public static and final for m data member, public and final for n data member, static and final for n1 data member, and public and static for v1 data member.
+
+interface I1
+{
+	int m;
+
+}
+the rule of java says that the data members of interface must be compulsorily assigned a value when they are declared in the interface because they are automatically considered as final i.e. constant data members in interface.
+so we get a compiler error for above code.
+
+
+
+RULE:
+Because the interface is a fully abstract class, so we cannot use the new keyword on interface.
+interface I1
+{
+
+
+}
+
+I1 ref1=new I1();
+we get compiler error because we used new keyword on interface I1.
+
+
+
+interface I1
+{
+
+
+}
+
+I1 ref1;
+now we dont get any compiler error because we are allowed to declare just a reference variable of interface.
+
+
+RULE:
+To create a subclass of interface we use the implements keyword instead of extends keyword.
+
+interface I1
+{
+
+
+}
+
+class MyClass1 implements I1
+{
+
+}
+
+abstract class MyClass2 implements I1
+{
+
+
+}
+
+here classes MyClass1 and MyClass2 are the subclasses of interface I1.
+
+But suppose we want to define a subclass of interface where the subclass is also an interface then we use extends keyword.
+
+interface I1
+{
+
+
+}
+
+interface I2 extends I1
+{
+
+
+}
+
+here I2 is a sub INTERFACE of interface I1.
+
+interface I3 implements I1
+{
+
+
+}
+
+we get compiler error.
+
+
+
+A class nor abstract class can never be the superclass of an interface.
+
+e.g. 
+class MyClass1
+{
+
+}
+
+abstract class MyClass2
+{
+
+
+}
+
+interface I1 extends MyClass1
+{
+
+
+}
+
+interface I2 extends MyClass2
+{
+
+
+}
+
+we get 2 compiler errors. we would have got compiler error even if we implements keyword instead of extends.
+
+
+
+RULE:
+The member methods of interface can never be declared as private nor protected because they are automatically consdiered as public. Also the member methods of interface can never be declared as final nor static because they are internally abstract. 
+
+interface I1
+{
+	private void display1();
+	protected void display2();
+	static void display3();
+	final void display4();
+}
+
+we get 4 compiler errors.
+
+RULE:
+Interface can never contain constructor unlike abstract class.
+
+interface I1
+{
+	I1()
+	{
+
+
+	}
+
+}
+
+we get compiler error.
+
+
+
+RULE:
+because interface is internally abstract so it also cannot be defined as final like abstract class.
+
+final interface I1
+{
+
+}
+we get compiler error.
+
+
+
+Multiple inheritance using interface:
+1 class or abstract class can implement multiple interfaces directly.
+
+interface I1
+{
+
+
+}
+
+interface I2
+{
+
+
+}
+
+class MyClass1 implements I1,I2
+{
+
+
+}
+
+no compiler error.
+
+1 interface can extend multiple interface directly.
+
+interface I1
+{
+
+
+}
+
+interface I2
+{
+
+
+}
+
+interface I3 extends I1,I2
+{
+
+
+}
+
+no compiler error.
+
+
+1 class or abstract class can extend atmost another class or abstract class but at same time can directly implement multiple interfaces. In this case the extends keyword comes before the implements keyword in the title of the class definition.
+
+interface I1
+{
+
+
+}
+
+interface I2
+{
+
+
+}
+
+class MyClass1
+{
+
+
+}
+
+class MyClass2 extends MyClass1 implements I1,I2
+{
+
+
+}
+
+No compiler error
+
+
+
+RULE:
+if the subclass of interface is an abstract class, then there is no need for the subclass to override any of the abstract member methods of interface.
+
+interface Vehicle
+{
+	abstract void start();
+	
+
+	void stop();
+
+	void run();
+
+	void refuelling();
+	
+
+}
+
+abstract class Car implements Vehicle
+{
+	public void refuelling()
+	{
+
+
+	}
+
+}
+
+Car being a abstract subclass of interface Vehicle it is optional for Car to override any of the member methods of superclass interface Vehicle. But Car has choosen to override the refuelling() abstract member method of interface Vehicle and it is fine.
+
+
+RULE:
+if the subclass of interface is not an abstract class, then it is compulsory for the subclass to override all of the non overridden abstract member methods from topmost interface in that inheritance which haveny yet been overridden in any of the subclass till now in that tree.
+
+
+interface Vehicle
+{
+	abstract void start();
+	
+
+	void stop();
+
+	void run();
+
+	void refuelling();
+	
+
+}
+
+abstract class Car implements Vehicle
+{
+	public void refuelling()
+	{
+
+
+	}
+
+}
+
+class Innova extends Car
+{
+	public void start()
+	{
+
+
+	}
+
+	public void stop()
+	{
+
+
+	}
+
+	public void run()
+	{
+
+
+	}
+
+}
+Car being a abstract subclass of interface Vehicle it is optional for Car to override any of the member methods of superclass interface Vehicle. But Car has choosen to override the refuelling() abstract member method of interface Vehicle and it is fine.
+
+
+
+Innova being a non abstract subclass of Car it must compulsory override the abstract member methods start(),stop() and run() of superclass interface Vehicle which havent hyet been overridden till now in the abstract superclass Car which is the direct subclass of Vehicle. But there is no need for Innova to override the refuelling() abstract member method of Vehicle because it has already been overridden by subclass Car which is superclass of Innova.
+
+
+Interfaces in java 8:
+In java 8 we can even add concrete non abstract member methods with a body or definition to interface. For that there is a keyword in java 8 called as default keyword which is not same as default acess modifier in java.
+The default member methods of a class which are non abstract are automatically again considered as public by java compiler just like the abstract member methods of interface.
+
+e.g.
+
+interface I1
+{
+	default void display1()
+	{
+
+
+	}
+
+}
+we dont get any compiler error for above code because though we have defined a non abstract member methpd for interface I1 but because we have defined it using default keyword so java compiler will automatically insert just public keyword for it.
+
+interface I1
+{
+	void display1()
+	{
+
+	}
+
+}
+
+we have not used default keyword explicitly for display1() member method of interface so it will automatically be considered as public and abstract but because we have provided a definition for display1() so we get compiler error.
+
+
+
+RULE:
+There is no need for any abstract or non abstract subclass of interface to override the default non abstract member method of interface.
+
+interface I1
+{
+	default void display1()
+	{
+
+	}
+
+}
+
+class MyClass1 implements I1
+{
+
+
+}
+
+we dont get any compiler error though MyClass1 which is subclass of interface I1 has not overridden the display1() member method of I1.
+
+
+
+RULE:
+The default keyword defined member method of interface cannot be defined as static nor final because if we define the default keyword non abstract member method of interface as static or final they it cannot be overridden be subclass but the interface provides an option for the subclass to either override the default keyword defined member method of interface or not.
+
+interface I1
+{
+	default static void display1()
+	{
+
+	}
+
+	default final void display2()
+	{
+
+
+	}
+}
+
+we get 2 compiler errors.
+
+
+RULE:
+in java 8 the member methods of interface are also allowed to be defined as static but in that case they cannot be abstract nor default. The static member methods of interface are automatically considered as final just like the abstract and non abstract default keyword defined member methods of interface. But the main difference between the default keyword defined non abstract member methods of interface and the static member methods of interface is that the static member methods of interface cannot be inherited by subclassbut to access them in subclass we must access them by using dot operator on interface name or on reference variable of interface.
+
+e.g.
+interface I1
+{
+
+	static void display1()
+	{
+
+
+	}
+
+}
+
+class MyClass1 implements I1
+{
+	 void display2()
+	{
+		display1();
+		MyClass1 mc1=new MyClass1();
+		mc1.display1();
+we get 2 compiler errors because display1() though it is a public and static member method of interface I1 which is superclass of MyClass1 it cannot be accessed directly in MyClass1 because it is not inherited by subclass MyClass1.
+
+
+	}	
+
+}
+
+
+interface I1
+{
+
+	static void display1()
+	{
+
+
+	}
+
+}
+
+class MyClass1 implements I1
+{
+	 void display2()
+	{
+		I1.display1();
+now no compiler error
+
+	}
+
+}
+
+interface I1
+{
+
+	default void display1()
+	{
+
+
+	}
+
+}
+
+class MyClass1 implements I1
+{
+	 void display2()
+	{
+		display1();
+		MyClass1 mc1=new MyClass1();
+		mc1.display1();
+
+		I1 ref1=new MyClass1();
+		ref1.display1();
+		now no compiler error
+
+	}
+
+}
+
+Interview question:
+
+interface I1
+{
+	int m=5;
+
+}
+
+interface I2
+{
+	int n=10;
+
+}
+
+class MyClass1 implements I1,I2
+{
+	void display1()
+	{
+		S.o.p(n);
+we get a compiler error for above statement because there are 2 data members with same name n in interface I1 as well as I2 which are both the direct super interfaces of subclass MyClass1. So java compiler is in state of ambiguity in above statement because it doesnt understand which n is accessed.
+
+
+		S.o.p(I1.n+" "+I2.n);
+now no compiler error for above statement
+
+	}
+
+}
+
+Interview question:
+
+interface I1
+{
+	default void display1()
+	{
+
+
+	}
+
+}
+
+interface I2
+{
+	default void display1()
+	{
+
+	}
+
+}
+
+class MyClass1 implements I1,I2
+{
+	
+}
+
+we get a compiler error for class MyClass1 because there are 2 default keyword defined non abstract member methods name display1() with same parameter list one in I1 and one in I2 resp. so again because of ambiguity we get compiler error.
+
+interface I1
+{
+	default void display1()
+	{
+
+
+	}
+
+}
+
+interface I2
+{
+	default void display1()
+	{
+
+	}
+
+}
+
+class MyClass1 implements I1,I2
+{
+	public void display1()
+	{
+
+
+	}
+	
+}
+
+now we dont get any compiler error because the subclass MyClass1 has overridden the display1() of both super interfaces I1 and I2.
+
+
+NOTE:
+When ever a subclass of interface overrides any of the abstract or default non abstract member methods of interface it must provide public keyword for the overriding method because the overridden member methods of interface are automatically public as per java compiler.
+
+
+
+
+
+
+*/
+
+
+/*
+pgm 1
+
+interface Shape
+member method: area() which is abstract
+
+there is a subclass of interface Shape called Square.
+member method: constructor and area
+accept sides for multiple squares and calculate their areas
+
+
+*/

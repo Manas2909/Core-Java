@@ -1,0 +1,1019 @@
+Inheritance:
+Inheritance is the feature of java, where 1 class acquires the  accessible members of the other class in such a way that the members of the other class can now be accessed on object of both classes.
+
+e.g.
+class MyClass1
+{
+
+	void display1()
+	{
+
+
+	}
+
+
+}
+
+class MyClass2 extends MyClass1
+{
+
+
+
+}
+
+here MyClass1 is the superclass and MyClass2 is the direct subclass of MyClass1. So MyClass1 is base class or parent class and MyClass2 is child class or subclass or derived or inherited class. extends keyword in java is used to define subclass from superclass.
+
+MyClass2 mc2=new MyClass2();
+mc2.display1();
+here we have called the display1() member method of class MyClass1 on object mc2 of class MyClass2. yet we dont get any compiler error though display1() has not been defined as a member method of subclass MyClass2 explicitly. This is because the display1() of superclass MyClass1 will be inherited by subclass MyClass2.
+ 
+
+RULE:
+The access modifiers(public,protected,default...we are not mentioning private here because the private members of superclass are never inherited by subclass) and the non access modifiers(static or abstract or final) of the superclass members remain same in subclass after being inherited by subclass. Also when the subclass object is explicitly created the implicit object of all its direct and indirect superclasses are automatically created by JVM inside the object of subclass.
+
+e.g.
+class MyClass1
+{
+
+	public int m=5;
+
+}
+
+class MyClass2 extends MyClass1
+{
+
+
+
+}
+
+the data member m after being inherited by subclass MyClass2 will remain public and non static in subclass MyClass2.
+
+MyClass2 mc2=new MyClass2();
+
+the initial value of the non static data member m in subclass MyClass2 will also be 5 because the implicit object of superclass MyClass1 will be automatically created inside mc2 object of subclass MyClass2 as per above mentioned rule.
+
+
+
+RULE:
+The private members of superclass are never inherited by subclass.
+
+
+e.g.
+class MyClass1
+{
+
+	private int m=5;
+
+}
+
+class MyClass2 extends MyClass1
+{
+
+	void display2()
+	{
+		m=10;
+here we get a compiler error for above statement, because the private data member m will not be inherited by subclass MyClass2.
+
+	}
+
+
+}
+
+
+
+RULE:
+The default access members of superclass are inherited by subclass only if superclass and subclass are either defined in same java pgm or in different java pgms but same package.
+
+
+e.g.
+MyClass1.java
+
+package abc.def;
+
+public class MyClass1
+{
+
+	void display1()
+	{
+
+
+	}
+
+}
+
+
+
+Pgm2.java
+import abc.def.MyClass1;
+class MyClass2 extends MyClass1
+{
+
+	void display2()
+	{
+		display1();
+compiler error because the display1() is a default access member method of superclass MyClass1. and because the subclass MyClass2 and superclass MyClass1 are in different packages so we get a compiler error for above statement.
+	}
+
+
+}
+
+
+
+e.g.
+
+MyClass1.java
+
+package abc.def;
+
+class MyClass1
+{
+
+	void display1()
+	{
+
+
+	}
+
+}
+
+
+
+Pgm2.java
+package abc.def;
+
+class MyClass2 extends MyClass1
+{
+
+	void display2()
+	{
+		display1();
+no compiler error because the display1() is a default access member method of superclass MyClass1. and because the subclass MyClass2 and superclass MyClass1 are in different packages so we dont get a compiler error for above statement.
+	}
+
+
+}
+
+
+
+
+
+RULE:
+The protected and public access members of superclass are inherited by subclass even if superclass and subclass are defined in different packages.
+
+e.g.
+MyClass1.java
+
+package abc.def;
+
+public class MyClass1
+{
+
+	public void display1()
+	{
+
+
+	}
+
+	protected void display3()
+	{
+
+
+	}
+}
+
+
+
+Pgm2.java
+import abc.def.MyClass1;
+class MyClass2 extends MyClass1
+{
+
+	void display2()
+	{
+		display1();
+		display3();
+no compiler error because the display1() and display3() are public and protected  access member methods resp. of superclass MyClass1 and so theu can be inherited by subclass even if superclass and subclass are in diff. packages.
+
+	}
+
+
+}
+
+
+
+
+
+RULE:
+THERE is a predefined class in java called as java.lang.Object class. It is considered as the automatic superclass of every user defined and pre defined class in java.
+
+
+so all predefined classes like java.lang.String class, java.io.BufferedReader class, java.util.Scanner class, java.io.IOException class, java.lang.System class etc. are all considered as direct or indirect subclasses of java.lang.Object class.
+
+
+e.g.
+class MyClass1
+{
+
+
+
+}
+
+class MyClass2 extends MyClass1
+{
+
+
+}
+
+MyClass1 is the direct superclass of MyClass2 and the java.lang.Object class is the direct superclass of MyClass1 and indirect superclass of MyClass2.
+
+
+
+RULE:
+suppose a class is either the direct or indirect subclass of another class in java, then the subclass is said to pass the IS-A test or inheritance test for that superclass which is just a theoretical test performed by java compiler to check whether 1 class is the subclass of another class.
+
+
+
+
+Types of inheritance: in java:
+
+
+1. single inheritance
+
+class A
+{
+
+
+}
+
+
+class B extends A
+{
+
+
+}
+
+B IS-A A
+
+
+
+
+
+2. multilevel inheritance
+
+class A
+{
+
+
+}
+
+
+class B extends A
+{
+
+
+}
+
+
+class C extends B
+{
+
+
+}
+C is the direct subclass of B and indirect subclass of A.
+
+A is father of B and ancestor of C.
+
+C is child of B and descendant of A.
+
+B is directs subclass of A and direct superclass of C.
+
+so B is child of A and parent of C.
+
+B IS-A A.
+C IS-A B.
+C IS-A A.
+
+we can have many more levels of inheritance i.e. C can have further direct subclass D and so on in multi level inheritance.
+
+
+
+3. multiple inheritance
+not allowed in java. because in java unlike in cpp, we dont have scope resolution operator :: to resolve ambiguity in java compiler in case we have different members with same name in both direct superclasses and accessed directly in subclass.
+
+class A
+{
+
+
+}
+
+
+class B 
+{
+
+
+}
+
+
+class C extends A,B
+{
+
+
+}
+C is the direct subclass of A and B and there is no inheritance relation between A and B.
+
+
+compiler error because multiple inheritance is not allowed in java using classes.
+
+
+But multiple inheritance is allowed in java using interfaces where interface is a special type of class.
+
+e.g.
+
+
+interface A
+{
+
+
+}
+
+
+interface B 
+{
+
+
+}
+
+
+interface C extends A,B
+{
+
+
+}
+
+now no compiler error because we have implemented multiple inheritance in java using interfaces.
+
+
+
+4. hierarchial inheritance:
+this is allowed in java.
+
+
+class A
+{
+
+
+}
+
+
+class B extends A 
+{
+
+
+}
+
+
+
+
+class C extends A
+{
+
+
+}
+
+here both C and B are direct subclasses of A.
+
+so C IS-A A.
+B IS-A A.
+
+There is no inheritance relation between B and C.
+
+we can have many more direct independent subclasses of A along with B and C in hierarchial inheritance.
+
+
+
+5. hybrid inheritance:
+this is combination of multiple and multi level inheritance and so it is not allowed in java again because it involves multiple inheritance.
+
+
+class A
+{
+
+
+}
+
+class B extends A
+{
+
+
+}
+
+class D
+{
+
+
+}
+
+class C extends B,D
+{
+
+
+}
+
+we get compiler error for above code because it implements hybrid inheritance.
+
+But hybrid inheritance can be implemented in java using interfaces.
+
+
+interface A
+{
+
+
+}
+
+interface B extends A
+{
+
+
+}
+
+interface D
+{
+
+
+}
+
+interface C extends B,D
+{
+
+
+}
+
+now no compiler error because we have implemented hybrid inheritance in java using interfaces instead of classes.
+
+
+6. cyclic inheritance:
+not allowed in java.
+
+e.g.
+class A extends A
+{
+
+
+}
+
+compiler error
+
+class A extends B
+{
+
+
+}
+
+class B extends A
+{
+
+
+}
+compiler error
+
+
+
+
+
+Polymorphism:
+
+Method overriding:
+
+class MyClass1
+{
+
+	void display1(int i)//overridden method
+	{
+		S.O.P("\n MyClass1");
+
+	}
+
+
+}
+
+class MyClass2 extends MyClass1
+{
+
+	void display1(int j)// overriding method
+	{
+
+		S.O.P("\n MyClass2");
+	}
+
+}
+
+in both superclass MyClass1 and subclass MyClass2, we have 2 non static member methods with same name and same parameter list and so the display1() of superclass MyClass1 inherited by subclass MyClass2 will be hidden by the display1() with same int type of parameter explicitly defined in subclass MyClass2. 
+
+MyClass2 mc2=new MyClass2();
+mc2.display1();
+here the display1() non static member method explicitly defined in subclass MyClass2 is called and the display1() of superclass MyClass1 inherited by subclass MyClass2 is ignored because the display1() explicitly defined in subclass MyClass2 has hidden the display1() of superclass MyClass1 inherited by subclass MyClass2 and so output displayed for mc2.display1() is MyClass2. This concept in java where a non static member method of superclass is inherited by subclass but is hidden by another explicitly defined non static member method of subclass with same name and same parametist list types, is called method overriding. The non static member method of superclass in method overriding is called overridden method and the non static member method of subclass which hides the inherited non static member method of superclass si called overriding method.
+
+
+
+RULES OF METHOD OVERRIDING:
+1. if overridden method of superclass is public, then the overriding member method of subclass with same name and same parameter list must also be public.
+
+class MyClass1
+{
+
+	public void display1(int i)//overridden method
+	{
+		S.O.P("\n MyClass1");
+
+	}
+
+
+}
+
+class MyClass2 extends MyClass1
+{
+
+	void display1(int j)// overriding method
+	{
+
+		S.O.P("\n MyClass2");
+	}
+
+}
+we get compiler error because the display1() of subclass MyClass2 must also be public instead of default.
+
+
+
+if overridden method of superclass is default, then the overriding member method of subclass with same name and same parameter list can be public or protected or default but not private.
+
+
+class MyClass1
+{
+
+	void display1(int i)//overridden method
+	{
+		S.O.P("\n MyClass1");
+
+	}
+
+
+}
+
+class MyClass2 extends MyClass1
+{
+
+	protected void display1(int j)// overriding method
+	{
+
+		S.O.P("\n MyClass2");
+	}
+
+}
+no compiler error.
+
+
+
+if overridden method of superclass is protected, then the overriding member method of subclass with same name and same parameter list must be public or protected but not default nor private.
+
+class MyClass1
+{
+
+	protected void display1(int i)//overridden method
+	{
+		S.O.P("\n MyClass1");
+
+	}
+
+
+}
+
+class MyClass2 extends MyClass1
+{
+
+	void display1(int j)// overriding method
+	{
+
+		S.O.P("\n MyClass2");
+	}
+
+}
+we get compiler error because the display1() of subclass MyClass2 must also be public or protected instead of default.
+
+
+
+
+
+
+
+if non static method of superclass is private, then the non static  member method of subclass with same name and same parameter list can be private or public or protected or default but that is not method overriding because private member methods of superclass are not inherited by subclass and so rules of method overriding dont apply to them.
+
+class MyClass1
+{
+
+	private void display1(int i)//overridden method
+	{
+		S.O.P("\n MyClass1");
+
+	}
+
+
+}
+
+class MyClass2 extends MyClass1
+{
+
+	void display1(int j)// overriding method
+	{
+
+		S.O.P("\n MyClass2");
+	}
+
+}
+we  dont get compiler error but the above code is not method overriding.
+
+
+
+
+if overridden method of superclass is having return type void, then the overriding member method of subclass with same name and same parameter list must also have return type void.
+
+class MyClass1
+{
+
+	void display1(int i)//overridden method
+	{
+		S.O.P("\n MyClass1");
+
+	}
+
+
+}
+
+class MyClass2 extends MyClass1
+{
+
+	int display1(int j)// overriding method
+	{
+
+		S.O.P("\n MyClass2");
+		return 5;
+	}
+
+}
+we get compiler error because the display1() of subclass MyClass2 must also have return type void.
+
+
+
+
+
+
+if overridden method of superclass is having return type as some primitive type, then the overriding member method of subclass with same name and same parameter list must also have same primitive type as its return type.
+
+class MyClass1
+{
+
+	int display1(int i)//overridden method
+	{
+		S.O.P("\n MyClass1");
+		treturn 5;
+
+	}
+
+
+}
+
+class MyClass2 extends MyClass1
+{
+
+	byte display1(int j)// overriding method
+	{
+
+		S.O.P("\n MyClass2");
+		return 5;
+	}
+
+}
+we get compiler error because the display1() of subclass MyClass2 must also have return type int though byte is compatable to int.
+
+
+
+if overridden method of superclass is having some class type as its return type, then the overriding member method of subclass with same name and same parameter list must have same class type as its return type or can have a direct or indirect subclass type of the return type of the overridden method as its own return type.
+
+class A
+{
+
+
+}
+
+class B extends A
+{
+
+
+}
+
+class C extends B
+{
+
+
+}
+
+class MyClass1
+{
+
+	A display1(int i)//overridden method
+	{
+		S.O.P("\n MyClass1");
+		return new A();
+	}
+
+
+}
+
+class MyClass2 extends MyClass1
+{
+
+	B display1(int j)// overriding method
+	{
+
+		S.O.P("\n MyClass2");
+		return new B();
+	}
+
+}
+
+
+class MyClass3 extends MyClass1
+{
+	C display1(int j)// overriding method
+	{
+
+		S.O.P("\n MyClass3");
+		return new C();
+	}
+
+}
+there is multi level inheritance between A-B-C and hierarchial inheritance between MyClass1 and MyClass2 and MyClass3.
+
+we dont get compiler error because the display1() of subclass MyClass2 and MyClass3 which override the display1() of superclass MyClass1 can have return types as A or B or C.
+
+
+
+
+
+
+
+
+
+
+if overridden method of superclass has declared some checked or unchecked exceptions, then the overriding member method of subclass with same name and same parameter list neednot declare any of the exceptions declared by overridden method of superclass.
+
+
+
+import java.io.*;
+class MyClass1
+{
+
+	void display1(int i)throws IOException,ArithmeticException
+	{
+		S.O.P("\n MyClass1");
+		
+
+	}
+
+
+}
+
+class MyClass2 extends MyClass1
+{
+
+	void display1(int j)// overriding method
+	{
+
+		S.O.P("\n MyClass2");
+		
+	}
+
+}
+
+we dont get a compiler error though the display1() overriding method of subclass MyClass2 has not declared any of the exceptions declared by overridden method of superclass MyClass1.
+
+
+
+overridding method of subclass can declare any number of extra  unchecked exceptions, which have not been declared by overridden method of superclass.
+
+
+
+import java.io.*;
+class MyClass1
+{
+
+	void display1(int i)
+	{
+		S.O.P("\n MyClass1");
+		
+
+	}
+
+
+}
+
+class MyClass2 extends MyClass1
+{
+
+	void display1(int j)throws ArithmeticException// overriding method
+	{
+
+		S.O.P("\n MyClass2");
+		
+	}
+
+}
+
+we dont get a compiler error though the display1() overriding method of subclass MyClass2 has  declared  extra exception ArithmeticException not declared by overridden method of superclass MyClass1 because ArithmeticException is an unchecked exception.
+
+
+
+
+overridding method of subclass cannot declare any extra  checked exceptions, which have not been declared by overridden method of superclass. so overriding member method of subclass can declare only those checked exceptions which are either same as the checked exceptions declared by superclass overridden method or are the subclasses of the checked exceptions declared by superclass overridden method.
+
+
+
+import java.io.*;
+class MyClass1
+{
+
+	void display1(int i)
+	{
+		S.O.P("\n MyClass1");
+		
+
+	}
+
+
+}
+
+class MyClass2 extends MyClass1
+{
+
+	void display1(int j)throws IOException// overriding method
+	{
+
+		S.O.P("\n MyClass2");
+		
+	}
+
+}
+
+we  get a compiler error because the display1() overriding method of subclass MyClass2 has  declared  extra exception IOException not declared by overridden method of superclass MyClass1 and IOException is an checked exception.
+
+
+
+import java.io.*;
+class MyClass1
+{
+
+	void display1(int i)throws Exception
+	{
+		S.O.P("\n MyClass1");
+		
+
+	}
+
+
+}
+
+class MyClass2 extends MyClass1
+{
+
+	void display1(int j)throws IOException// overriding method
+	{
+
+		S.O.P("\n MyClass2");
+		
+	}
+
+}
+
+we dont get a compiler error because the display1() overriding method of subclass MyClass2 has  declared  checked exception IOException which is the subclass of the java.lang.Exception class declared by overridden method of superclass MyClass1.
+
+
+
+
+import java.io.*;
+class MyClass1
+{
+
+	void display1(int i)
+	{
+		S.O.P("\n MyClass1");
+		
+
+	}
+
+
+}
+
+class MyClass2 extends MyClass1
+{
+
+	void display1(int j)
+	{
+
+		S.O.P("\n MyClass2");
+		
+	}
+
+}
+
+
+
+RULE:
+in java we are allowed to declare the reference variable of superclass and assign it the object of direct or indirect subclass.
+
+MyClass1 mc1=new MyClass2();
+here we have declared reference variable mc1 of superclass MyClass1 and assigned the object of subclass MyClass2.
+
+mc1.display1(5);
+here the display1() is called on reference variable mc1 of superclass MyClass1 which refers to object of subclass MyClass2.
+
+now here there are 2 things. First is java compiler and then JVM. At compile time, whenever the java compiler is compiling any statement where we have accessed any member on any reference variable, then java compiler always checks what is the class type of the reference variable on which the member has been accessed. The java compiler at compile time never checks what is the class type of the object which the reference variable refers to.
+
+so while compiling statement mc1.display1(5) the java compoiler just checks what is the class type of mc1 variable and finds it is class MyClass1 and then java compiler also finds that we have defined the display1() member method in superclass MyClass1 with default access modifier and int parameter and so the java compiler concludes that the statement mc1.display1(5) is syntactically correct because the display1() has been properly called on reference variable mc1.
+
+at runtime, when jvm executes any statement in which we have accessed a member on any reference variable, then jvm always looks at the class type of the object which the reference variable refers to and then jvm finds that mc1 refers to object of class MyClass2 and so at runtime the JVM calls the display1() of subclass MyClass2.
+
+so the statement mc1.display1(5) will call the display1() of subclass MyClass2.
+
+so in method overriding whether to call overridden or overriding version of method is always decided by JVM at runtime based on class type of the object which the reference variable refers to. so method overriding is called as runtime binding or dyanamic polymorphism.
+
+
+
+import java.io.*;
+class MyClass1
+{
+
+	void display1(int i)
+	{
+		S.O.P("\n MyClass1");
+		
+
+	}
+
+
+}
+
+class MyClass2 extends MyClass1
+{
+
+	void display2(int j)
+	{
+
+		S.O.P("\n MyClass2");
+		
+	}
+
+}
+
+
+MyClass1 mc1=new MyClass2();
+mc1.display2(10);
+
+now we have accessed the display2() member method on reference variable mc1. At compile time java compiler again only looks at what is class type of mc1 reference variable and finds that it is class MyClass1 and in class MyClass1 there is no member method named display2() defined. so compiler error though mc1 refers to object of class MyClass2.
+
+
+import java.io.*;
+class MyClass1
+{
+
+	void display1(int i)
+	{
+		S.O.P("\n MyClass1");
+		
+
+	}
+
+
+}
+
+class MyClass2 extends MyClass1
+{
+
+	void display2(int j)
+	{
+
+		S.O.P("\n MyClass2");
+		
+	}
+
+}
+
+
+MyClass1 mc1=new MyClass2();
+((MyClass2)mc1).display2(10);
+
+here we have explicitly converted the reference type of mc1 variable into subclass type MyClass2. so at compile time, java compiler will conclude that the above conversion is narrowing conversion because MyClass2 is the superclass of the class type MyClass1 of mc1(suppose there was no inheritance relation between the class type of mc1 and converted type MyClass2 we would get a compiler error for above conversion statement).
+
+also java compiler now looks at class type of MyClass2 and finds that there is a display2() method defined in MyClass2 with int parameter and default access modifier. so java compiler doesnt give any compiler error for statement ((MyClass2)mc1).display2(10).
+
+and at runtime the JVM calls the display2() of class MyClass2.
+
+

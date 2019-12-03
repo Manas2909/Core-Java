@@ -1,0 +1,194 @@
+protected access modifier:
+when 2 classes are in same package, then the protected and default access members of one class behave in same manner. i.e. they can be accessed by the other class defined in same package which is not the subclass of the class to which the protected and default access members belong and also they can be inherited and accessed by the subclasses of the class to where the protected and default access members belong if the classes are in same package.
+ 
+
+Pgm1.java
+
+package abc.def;
+
+ class MyClass1
+{
+	void display1()
+	{
+
+
+	}
+
+	protected void display2()
+	{
+
+
+	}
+
+
+}
+
+
+Pgm2.java
+
+package abc.def;
+
+
+class MyClass2
+{
+	void display3()
+	{
+
+		MyClass1 mc1=new MyClass1();
+		mc1.display1();
+		mc1.display2();
+because display1() and display2() are protected and default access members of class MyClass1 and because MyClass1 and MyClass2 are in same package so the class MyClass2 can access the protected and default access members of class MyClass1.
+	
+		
+	}
+
+
+
+}
+
+class MyClass3 extends MyClass1
+{
+
+	void display4()
+	{
+		display1();
+		display2();
+
+		MyClass3 mc3=new MyClass3();
+		mc3.display1();
+		mc3.display2();
+
+because MyClass3 is subclass of MyClass1 and both MyClass1 and MyClass3 are in same package,so the subclass MyClass3 can inherit the protected and default access member methods display1() and display2() of superclass MyClas1 and can access them using inheritance i.e. either directly inside its non static member methods or using dot operator on reference variable of same class MyClass3 in both static and non static member methods of class MyClass3.
+
+		MyClass1 mc1=new MyClass1();
+		mc1.display1();
+		mc1.display2();
+we can also access the protected and default access member methods display1() and display3() of superclass MyClass1 inside subclass MyClass3 using the reference variable of class MyClass1.
+
+
+	}
+
+
+}
+
+
+
+when 2 classes are in different packages, then both the protected and default access members of one class cannot be accessed in other class if the 2nd class is not subclass of the 1st class to which the protected and default access members belong.
+
+
+MyClass1.java
+
+package abc.def;
+
+public class MyClass1
+{
+	void display1()
+	{
+
+
+	}
+
+	protected void display2()
+	{
+
+
+	}
+
+	public void display5()
+	{
+
+
+	}
+
+
+}
+
+
+Pgm2.java
+
+package mno.pqr;
+import abc.def.MyClass1;
+
+
+class MyClass2
+{
+	void display3()
+	{
+
+		MyClass1 mc1=new MyClass1();
+		mc1.display1();
+		mc1.display2();
+because display1() and display2() are protected and default access members of class MyClass1 and because MyClass1 and MyClass2 are in different package so the class MyClass2 cannot access the protected and default access members of class MyClass1 and so we get a compiler error for the 2 above statements mc1.display1() and mc1.display2();
+	
+		mc1.display5();
+now we dont get a compiler error for above statement, because display5() is a public member method of class MyClass1 and so it can be accessed inside any class outside the package of class MyClass1.
+
+	}
+
+
+
+}
+
+
+
+when 2 classes are in different packages, then the protected  access members but not default access members of one class can be accessed in other class if the 2nd class is subclass of the 1st class to which the protected and default access members belong.
+But the protected members of the 1st class can be accessed in the 2nd class which is in a different package only using inheritance i.e. we can access protected members of superclass inside the different-packaged-subclass either directly in subclass(inside non static member method of subclass)or on reference variable of subclass. But suppose we try to acess the protected and default access members of superclass in the different packaged subclass using reference variable of superclass we get a compiler error.
+
+
+MyClass1.java
+
+package abc.def;
+
+public class MyClass1
+{
+	void display1()
+	{
+
+
+	}
+
+	protected void display2()
+	{
+
+
+	}
+
+	public void display5()
+	{
+
+
+	}
+
+
+}
+
+
+Pgm2.java
+
+package mno.pqr;
+import abc.def.MyClass1;
+
+
+class MyClass2 extends MyClass1
+{
+	void display3()
+	{
+
+		MyClass2 mc2=new MyClass2();
+		mc2.display1();
+		mc2.display2();
+because display1() and display2() are protected and default access members of class MyClass1 and because MyClass1 and MyClass2 are in different package and because MyClass2 is subclass of MyClass1 so the subclass MyClass2 can access the protected  access member display2() of super class MyClass1 either directly or using dot operator on reference variable of MyClass2 i.e. using inheritance but cannot access the display1() default access member method of superclass MyClass1 in any manner and so we get a compiler error for the  statements mc2.display1() and dont get a compiler error for  mc2.display2();
+	
+display5() being a public member method of class MyClass1 can be accessed in any class in a different package which may or maynot be subclass of MyClass1 and can be accessed in any manner in any class in a different package.
+
+		MyClass1 mc1=new MyClass2();
+		mc1.display1();
+		mc1.display2();
+we get a compiler error for both statement mc1.display1() and mc1.display2() because we are trying to access the protected access member method of superclass MyClass1 in the different-packaged-subclass MyClass2 using dot operator on refreence variable of superclass MyClass1 which is not allowed and the default access member methods of superclass canot be accessed anyways in any class(whether subclass or not) which is in a different package.
+
+	}
+
+
+
+}
+

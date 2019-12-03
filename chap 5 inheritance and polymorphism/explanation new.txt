@@ -1,0 +1,230 @@
+RULE:
+To call a constructor of a class from another constructor of same class we use the this() call statement and pass appropriate arguments to it.
+
+e.g.
+
+class MyClass1
+{
+
+	MyClass1(String str)
+	{
+
+
+	}
+
+	MyClass1(int i)
+	{
+		this("abc def");
+calls String parameterised constructor of same class MyClass1
+
+	}
+
+}
+
+
+RULE:
+To call a constructor of a class from another constructor of direct sub class we use the super() call statement and pass appropriate arguments to it.
+
+e.g.
+
+class MyClass1
+{
+
+	MyClass1(String str)
+	{
+
+
+	}
+
+	MyClass1(int i)
+	{
+		this("abc def");
+calls String parameterised constructor of same class MyClass1
+
+	}
+
+}
+
+class MyClass2 extends MyClass1
+{
+
+	MyClass2(String str)
+	{
+		super(5);
+calls the int parameterised constructor of direct superclass MyClass1
+
+
+	}
+
+}
+
+
+
+RULE:
+Inside the body of a constructor we can never mention any statement before the this() call statement.
+
+class MyClass1
+{
+
+	MyClass1(String str)
+	{
+		
+
+
+	}
+
+	MyClass1(int i)
+	{
+		int m=5;
+		this("abc def");
+we get compiler error because we mentioned some statement before this() call statement
+	}
+
+}
+
+class MyClass2 extends MyClass1
+{
+
+	MyClass2(String str)
+	{
+		super(5);
+calls the int parameterised constructor of direct superclass MyClass1
+
+
+	}
+
+}
+
+
+
+RULE:
+Inside the body of a constructor we can never mention any statement before the super() call statement.
+
+class MyClass1
+{
+
+	MyClass1(String str)
+	{
+		
+
+
+	}
+
+	MyClass1(int i)
+	{
+		int m=5;
+		this("abc def");
+we get compiler error because we mentioned some statement before this() call statement
+	}
+
+}
+
+class MyClass2 extends MyClass1
+{
+
+	MyClass2(String str)
+	{
+		System.out.println("\n Welcome");
+		super(5);
+we get compiler error
+
+	}
+
+}
+
+RULE:
+Inside the body of a constructor we can never mention both super() nor this() call statements at same time.
+
+
+class MyClass1
+{
+
+	MyClass1(String str)
+	{
+		
+
+
+	}
+
+	MyClass1(int i)
+	{
+		int m=5;
+		this("abc def");
+we get compiler error because we mentioned some statement before this() call statement
+	}
+
+}
+
+class MyClass2 extends MyClass1
+{
+
+	MyClass2(String str)
+	{
+		this(9);
+		super(5);
+compiler error
+
+	}
+
+	MyClass2(int m)
+	{
+		super("mno pqr");
+		this("abc def");
+compiler error
+
+	}
+}
+
+
+RULE:
+Inside the body of a constructor the super() or this() call statements with appropriate arguments must be the 1st statement. But suppose the programmer has neither inserted the super() nor this() call statement as 1st statements, then the java compiler automatically inserts the super() call statement with no arguments as 1st statement of constructor.
+
+class MyClass1
+{
+
+	MyClass1()
+	{
+		System.out.println("\n Welcome");	
+
+
+	}
+
+}
+
+class MyClass2 extends MyClass1
+{
+
+	MyClass2(String str)
+	{
+
+	}
+
+}
+
+MyClass2 mc2=new MyClass2("abc def");
+
+here java compiler has automatically inserted super() call statement with no arguments as 1st statement of body of the constructor of subclass MyClass2. and so output is Welcome.
+
+class MyClass1
+{
+
+	MyClass1(int j)
+	{
+		System.out.println("\n Welcome");	
+
+
+	}
+
+}
+
+class MyClass2 extends MyClass1
+{
+
+	MyClass2(String str)
+	{
+
+	}
+
+}
+
+compiler error because java compiler tries to insert the super() call statement with no arguments as 1st statement of the body of the direct subclass MyClass2. But there is non  non parameterised constructor in superclass MyClass1 and nor will java compiler automatically create default non parameterised constructor because we have already defined a constructor explciitly in MyClass1. 

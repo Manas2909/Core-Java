@@ -1,0 +1,386 @@
+packages:
+package is a folder which stores the compiled .class files of the different classes of different java pgms.
+
+The main use of packages are:
+1. the packages separate the .class files from the .java file. This is because when we dont use packages then the .class files of the classes of the java pgm are stored into a default package which is the same folder where the .java pgm is stored. But when we use packages, the .java pgm is stored into a different folder and the .class files of the classes in the java pgm are stored into a different folder. So accidental deletion of the java pgm doesnt take place.
+
+2. when we use packages, we can group together classes of a similar functionality into a common folder or package. This helps to improve modularity and flexibility of application because new classes can be added or removed without affecting other classes in the application. 
+e.g. the java.io package stores the .class files of classes like BufferedReader,InputStreamReader,IOException class etc. which are used for different types of input and output.
+
+3. packages help to improve security of the application because they prevent direct access to the classes belonging to them.
+
+4. using packages we can access the classes of 1 java pgm inside another java pgm.
+
+
+
+
+RULE:
+To access the classes of a different package into a different pgm which doesnt belong to that package we need to write import statements for those external classes which are defined in the other package.
+
+
+e.g.
+import java.io.*;
+import java.util.*
+
+class MyClass1
+{
+
+	BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+	Scanner sc=new Scanner(System.in);
+
+	String str;
+	int i;
+	void acc()throws IOException
+	{
+		System.out.println("\n Enter string value and integer value");
+
+		str=br.readLine();
+		i=Integer.parseInt(sc.next());
+
+	}
+
+	public static void main(String args[])throws IOException
+	{
+		MyClass1 mc1=new MyClass1();
+		mc1.acc();
+
+	}
+}
+
+here in the above code we have accessed classes like BufferedReader,InputStreamReader,IOException of java.io package and Scanner class of java.util package. So we needed to import them into the java pgm using the corresponding import java.io.* and import java.util.* statements else we would get compiler error.
+
+import statement is not same as #include statement of C and C++.
+
+import statement just tells java compiler where to locate those external classes which have been used in the pgm directly but defined in some other package.
+
+The java compiler at compile time will then replace each such external class name in the .class file code by the package name.class name.
+
+so the .class file of the above MyClass1 class wil look as below at compile time:
+
+class MyClass1.class
+{
+
+	java.io.BufferedReader br=new java.io.BufferedReader(new java.io.InputStreamReader(java.lang.System.in));
+	java.util.Scanner sc=new java.util.Scanner(java.lang.System.in);
+
+	java.lang.String str;
+	int i;
+	void acc()throws java.io.IOException
+	{
+		java.lang.System.out.println("\n Enter string value and integer value");
+
+		str=br.readLine();
+		i=java.lang.Integer.parseInt(sc.next());
+
+	}
+
+	public static void main(java.lang.String args[])throws java.io.IOException
+	{
+		MyClass1 mc1=new MyClass1();
+		mc1.acc();
+
+	}
+}
+
+
+
+At runtime, the JVM can now easily load the corresponding .class files of the external classes from their corr. packages because the java compiler has mentioned the package name before the name of the external classes in the .class file.
+
+Even if an external class in the corresponding pgm is used multiple times, still its .class file will be loaded only once by JVM at runtime.
+
+also though we have written import java.io.* and import java.util.*, in the java pgm, this doesnt mean that the JVM loads all the .class files from the java.io and java.util packages though * operator when used on the package name means all classes in the package.
+
+So only those external classes of the corresponding package which have been used in the java pgm will be loaded by JVM at runtime.
+so only the BufferedReader, InputStreamReader and IOException class of java.io package and Scanner class of java.util package will be loaded by JVM during execution of above code because only those classes have been used in the pgm.
+
+
+RULE:
+The java compiler automatically writes the import java.lang.* statement in the compiled .class file code if it has not been mentioned by programmer explicitly in the pgm. So the programmer is allowed to directly use any of the classes of java.lang package in the java pgm even if the classes have not been imported. But for other classes of other packages, the programmer must write separate import statements for them to use them in the pgm directly.
+
+
+
+Types of import statements:
+1. implicit import:
+it means when we use the * operator after the package name in import statement. Using implicit import we can use all the classes of that package in the pgm on whose name we have used the * operator in the import statement but the .class files of only those classes of that package will be loaded which have been used in the java pgm.
+
+import java.io.*;
+import java.util.*
+
+class MyClass1
+{
+
+	BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+	Scanner sc=new Scanner(System.in);
+
+	String str;
+	int i;
+	void acc()throws IOException
+	{
+		System.out.println("\n Enter string value and integer value");
+
+		str=br.readLine();
+		i=Integer.parseInt(sc.next());
+
+	}
+
+	public static void main(String args[])throws IOException
+	{
+		MyClass1 mc1=new MyClass1();
+		mc1.acc();
+
+	}
+}
+
+in above code we could have used all classes of java.io and java.util packages in the pgm because we have used the implicit import statements on the javaio and java.util package name.
+
+So using implicit import the no. of import statements in the pgm will reduce and so the size of the java pgm code will reduce and the load on java compiler will reduce but the readability of the pgm also decreases because the user of the pgm cannot make out which classes of that package have been used in the pgm just by looking at import statement.
+
+
+2. explicit import:
+it means when we mention the class name in the import statement after the package name. Using explicit import we can use only that class of that package whose name has bene mentioned explicitly in the explicit import statement.
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.util.Scanner;
+
+class MyClass1
+{
+
+	BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+	Scanner sc=new Scanner(System.in);
+
+	String str;
+	int i;
+	void acc()throws IOException
+	{
+		System.out.println("\n Enter string value and integer value");
+
+		str=br.readLine();
+		i=Integer.parseInt(sc.next());
+
+	}
+
+	public static void main(String args[])throws IOException
+	{
+		MyClass1 mc1=new MyClass1();
+		mc1.acc();
+
+	}
+}
+
+in above code we could have used only classes BufferedReader,InputStreamReader and IOException of java.io and Scanner class of java.util packages in the pgm because we have used the explicit import statements on the java.io and java.util package name mentioned along with those class names explicitly.
+
+So using explicit import the no. of import statements in the pgm will increases and so the size of the java pgm code will increases and the load on java compiler will increase but the readability of the pgm also increases because the user of the pgm can now make out which classes of that package have been used in the pgm just by looking at explicit import statement.
+
+
+
+Interview question:
+import java.util.*;
+import java.sql.*;
+
+class MyClass1
+{
+
+	Date d1=new Date();
+
+}
+we get a compiler error for above statement Date d1=new Date(). This is because there are 2 different classes with the name Date in java.sql and java.util packages resp. The Date class in java.sql package only stores the system month year and date but the Date class of java.util stores the system time along with year month and date. The java.sql.Date class is also a subclass of java.util.Date class.
+
+Because we have used implicit import statements in the above pgm, by using the * operator on the java.util and java.sql package names, so there is an ambiguity in minds of java compiler that which Date class is being accessed in statement Date d1=new Date().
+
+
+import java.util.Date;
+import java.sql.*;
+
+class MyClass1
+{
+
+	Date d1=new Date();
+
+}
+here we dont get any compiler error for statement Date d1=new Date() because here the Date class of java.util package is accessed because it is imported using explicit import statement and explicit import statements have more priority than implicit import statements.
+
+
+HOW TO ACCESS Date class of both packages in same pgm?
+by not using import statements but just mentioning the package name before the Date class name.
+
+
+
+
+class MyClass1
+{
+
+	java.sql.Date d1=new java.sql.Date();
+	java.util.Date d2=new java.util.Date();
+
+}
+
+
+HOW TO ACCESS EXTERNAL CLASSES IN THE JAVA PGM DEFINED IN ANOTHER PACKAGE WITHOUT WRITING IMPORT STATEMENTS FOR THEM?
+Just mention the package name before the corr. external class name.
+
+class MyClass1
+{
+
+	java.io.BufferedReader br=new java.io.BufferedReader(new java.io.InputStreamReader(java.lang.System.in));
+	java.util.Scanner sc=new java.util.Scanner(java.lang.System.in);
+
+	java.lang.String str;
+	int i;
+	void acc()throws java.io.IOException
+	{
+		java.lang.System.out.println("\n Enter string value and integer value");
+
+		str=br.readLine();
+		i=java.lang.Integer.parseInt(sc.next());
+
+	}
+
+	public static void main(java.lang.String args[])throws java.io.IOException
+	{
+		MyClass1 mc1=new MyClass1();
+		mc1.acc();
+
+	}
+}
+
+
+
+
+
+
+Is there any difference between
+import java.io.*;
+and 
+import java.*;
+
+yes, because remember that the packages are never imported in an import statement but only the classes of that package are imported in the import statement.
+
+so import java.io.* will import all classes of java.io package i.e. only of the io sub package. and import java.* imports those classes which are defined directly in the java package but not in the sub packages of java package.
+so just by writing import java.* we cannot use the classes defined in the sub packages of the java package.
+
+
+
+import java.io;
+we get compiler error for above statement because remember that the package is never imported in an import statement but the classes of a package are imported.
+
+
+
+Static import:
+using static import we can directly import the static data members and static member methods of a class and after that we dont need to write the dot operator on name on class or on refreence variable of class to acess the static members of the class in that pgm. Using static imports we can directly access the static members of the class in the pgm.
+
+e.g.
+import static java.lang.Math.*;
+in above statement we have used the static import statement on Math class name so now the programmer can use all the static members of java.lang.Math class without need for using dot operator on Math class name.
+
+class MyClass1
+{
+
+	void opns()
+	{
+		System.out.println("\n The square root of 3 is "+sqrt(3)+"\n The maximum between 3 and 10 is "+max(3,10)+"\n the minimum between 3 and 10 is "+min(3,10)+"\n the random double value between 0 and 1 is "+random());
+
+	}
+
+}
+
+
+sqrt(),min(),max() and random() are static member methods of java.lang.Math class and because we have used the static import on Math class name we could directly access the static members of java.lang.Math class in the pgm.
+
+
+NOTE:
+random() is a static member method of java.lang.Math class which returns a random double value between 0 and 1 and this random value is selected entirely by JVM and not in hand sof programmer or user of pgm.
+
+
+
+Interview question:
+
+import static java.lang.Integer.*;
+import static java.lang.Short.*;
+
+class MyClass1
+{
+	void opns()
+	{
+		System.out.println(MAX_VALUE+"\n"+MIN_VALUE);
+
+	}
+
+}
+
+we get a c ompiler error for above code. This is because verey wrapper class of java.lang package apart from Boolean contains 2 predefined public static and final i.e. static and constant data members named MAX_VALUE and MIN_VALUE WHICH STORE THe maximum and minimum value resp. for that primitive data type associated with the wrapper class.
+so because we have used implicit static import statements on both java.lang.Integer and java.lang.Short class so there is an ambiguity in minds of java compiler that which MAX_VALUE and which MIN_VALUE constant data members to access in the above statement S.o.p().
+
+
+
+
+import static java.lang.Integer.MAX_VALUE;
+import static java.lang.Short.MIN_VALUE;
+
+class MyClass1
+{
+	void opns()
+	{
+		System.out.println(MAX_VALUE+"\n"+MIN_VALUE);
+
+	}
+
+}
+
+we dont get a compiler error for above code. this is because the MAX_VALUE of Integer class and MIN_VALUE of Short class are accessed in the above statement because they are imported using explicit import statement.
+
+import static java.lang.Integer.MAX_VALUE;
+import static java.lang.Short.MIN_VALUE;
+
+class MyClass1
+{
+	int MAX_VALUE=15;
+	static float MIN_VALUE=5;
+	void opns()
+	{
+		System.out.println(MAX_VALUE+"\n"+MIN_VALUE);
+
+	}
+
+}
+
+we dont get a compiler error for above code. this is because the MAX_VALUE AND MIN_VALUE of class MyClass1 are accessed because they have been explicitly defined as data members of class MyClass1 and so they have more priority than the MAX_VALUE and MIN_VALUE which have been imported using explicit imports.
+
+
+import static java.lang.*;
+we get a compiler error because we can never use the static import statement directly on package name but only on class name.
+
+
+
+
+PGM1:
+define a class named MyClass1 in Pgm1.java which is in a package named abc.def and access the class MyClass1 and its member methods in another program named Pgm2.java which is in different package but same java project and same workspace of eclipse.
+
+In above case we will just need to define the class MyClass1 as public and so name of the corr. java pgm becomes MyClass1.java and then we will have to write import statement in Pgm2.java to access MyClass1 in Pgm2.
+
+
+
+
+PGM1:
+define a class named MyClass1 in Pgm1.java which is in a package named abc.def and access the class MyClass1 and its member methods in another program named Pgm2.java which is in different package and also java project but same workspace of eclipse.
+
+In above case we will first need to set CLASSPATH of the java project to which Pgm2.java and set the Classpath of that 2nd java project to the path where the .class file of 1st java project are stored and then we need to write import statement in Pgm2.java to import MyClass1 of MyClass1.java(because MyClass1 will again need to be defined as public).
+
+TO SET CLASSPATH environment variable of 2nd java project-> right click on 2nd java project-> Build Path-> Configure Build Path-> Libraries-> Add Class Folder-> select bin of 2nd java project.
+
+
+
+
+
+define a class named MyClass1 in Pgm1.java which is in a package named abc.def and access the class MyClass1 and its member methods in another program named Pgm2.java which is in different package and also java project and different workspace of eclipse.
+
+In above case we will first need to create a jar file of the java project to which the 2nd java program Pgm2.java belongs(jar means java archive file and it stores the compressed .class files of the classes of the java programs in that java project). Then we need to set CLASSPATH of the java project to which Pgm2.java and set the Classpath of that 2nd java project to the path where the .jar file of 1st java project are stored and then we need to write import statement in Pgm2.java to import MyClass1 of MyClass1.java(because MyClass1 will again need to be defined as public).
+
+TO SET CLASSPATH environment variable of 2nd java project to the jar file of 1st java project-> right click on 2nd java project-> Build Path-> Configure Build Path-> Libraries-> Add External jars-> select path of the location on hard disk where the jar file of 1st java project is saved.
+
+to create jar file of java project-> right click on java project->export-> select path and name of the jar file where that jar file will be saved on hard disk.
+
+
+
+

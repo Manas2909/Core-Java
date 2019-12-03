@@ -1,0 +1,353 @@
+Abstract class:
+suppose we have a class called Vehicle.
+
+Now the general question asked when we say we have travelled by vehicle is which Vehicle.
+
+so we will need to define separate subclasses of class Vehicle in the pgm and we will not need to create the object of class Vehicle directly but we will need to create object of its subclasses.
+
+so suppose we want to enforce the rule that the explicit object of class Vehicle must not be created in the pgm using new keyword, then we must define class Vehicle as abstract class.
+
+Abstract class is that class whose explicit object cannot be created using new keyword.
+
+abstract class Vehicle
+{
+
+
+}
+
+
+Vehicle v1=new Vehicle();
+we get a compiler error because we cannot use new keyword on abstract class name.
+
+Vehicle v1;
+now we dont get any compiler error because we are just allowed to declare a reference variable of the class without using new keyword on it.
+
+
+abstract class Vehicle
+{
+	void start()
+	{
+
+	}
+
+	void stop()
+	{
+
+
+	}
+
+	void run()
+	{
+
+
+	}
+
+	void refuelling()
+	{
+
+
+	}
+
+}
+
+class Car extends Vehicle
+{
+
+
+}
+
+class Bike extends Vehicle
+{
+
+
+}
+
+class Bus extends Vehicle
+{
+
+
+}
+
+
+
+start(),stop(),run(),refuelling() are the 4 non static member methods of class Vehicle. But because we are not allowed to use keyword on class Vehicle name, because it is abstract class, so we dont need to provide a body or definition to the 4 member methods of class Vehicle. Instead we can declare the 4 member methods in class Vehicle as abstract member methods and remove the body or definition from them and in that case all the 3 subclasses of class Vehicle would have to override all the abstract member methods of superclass Vehicle in their own unique way.
+
+
+
+abstract class Vehicle
+{
+	abstract void start();
+
+	abstract void stop();
+
+	abstract void run();
+
+	abstract void refuelling();
+
+
+}
+
+class Car extends Vehicle
+{
+		void start()
+	{
+
+	}
+
+	void stop()
+	{
+
+
+	}
+
+	void run()
+	{
+
+
+	}
+
+	void refuelling()
+	{
+
+
+	}
+
+
+
+}
+
+class Bike extends Vehicle
+{
+		void start()
+	{
+
+	}
+
+	void stop()
+	{
+
+
+	}
+
+	void run()
+	{
+
+
+	}
+
+	void refuelling()
+	{
+
+
+	}
+
+
+
+}
+
+class Bus extends Vehicle
+{
+		void start()
+	{
+
+	}
+
+	void stop()
+	{
+
+
+	}
+
+	void run()
+	{
+
+
+	}
+
+	void refuelling()
+	{
+
+
+	}
+
+
+
+}
+
+
+RULE:
+When any 1 member method of class is declared as abstract, then the entire class must be defined as abstract.
+
+class A
+{
+	abstract void display1();
+
+}
+
+we get a compiler error because the class A must also be defined as abstract.
+
+
+RULE:
+An abstract class can also contain non abstract member methods i.e. normal member methods with a body or definition. Even if all member methods of a class are defined as non abstract still we dont get any error.
+
+abstract class A
+{
+	 void display1()
+	{
+
+	}
+
+	void display2()
+	{
+
+	}
+
+}
+
+we dont get a compiler error.
+
+
+RULE:
+The abstract class cannot be defined as final because subclass of final class cannot be created. But suppose the subclass of an abstract class cannot be created then there is no way to access any of the non static members of the abstract class.
+
+final abstract class A
+{
+
+
+}
+
+compiler error
+
+
+
+RULE:
+The abstract member method cannot be declared as static nor final nor private because the static,final or private member methods cannot be overridden.
+
+abstract class A
+{
+	abstract final void display1();
+	abstract static void display2();
+	private abstract void display3();
+
+}
+
+compiler error
+
+
+RULE:
+Abstract class can contain constructor. The rule says that new keyword cannot be directly used on abstract class name but the implicit object of the abstract class gets created when the explicit object of the subclass of the abstract class is created. So the constructor of abstract class can be called from the constructor of its direct subclass.
+
+
+abstract class A
+{
+	A(String str)
+	{
+
+	}
+
+}
+
+class B extends A
+{
+	B()
+	{
+		super("abc def");
+
+
+	}
+
+}
+B b1=new B();
+in the above statement the non parameterised explicit constructor of the class B gets called and from there we have called string parameterised constructor of abstract superclass A. So the implicit object of the abstract superclass A gets automatically created inside explicit object of subclass B.
+
+
+
+RULE:
+If the subclass of an abstract class is itself abstract, then it neednot override any of the abstract member methods of its abstract superclass.
+
+abstract class Vehicle
+{
+	abstract void start();
+
+	abstract void stop();
+
+	abstract void run();
+
+	abstract void refuelling();
+
+
+}
+
+abstract class Car extends Vehicle
+{
+
+	void refuelling()
+	{
+
+
+	}
+
+
+
+}
+here Car is the abstract subclass of abstract superclass Vehicle. So Car doesnt need to override any of the abstract member methods of the abstract superclass Vehicle. But it has choosen to override refuelling() abstract member method of abstract superclass Vehicle and that is fine.
+
+
+
+RULE:
+If the subclass of an abstract class is non abstract, then it needs to compulsorily override all of the non overridden abstract member methods of its abstract superclasses which have not yet been overridden in that inheritance tree. It may or maynot override the other methods.
+
+
+abstract class Vehicle
+{
+	abstract void start();
+
+	abstract void stop();
+
+	abstract void run();
+
+	abstract void refuelling();
+
+
+}
+
+abstract class Car extends Vehicle
+{
+
+	void refuelling()
+	{
+
+
+	}
+
+
+
+}
+
+class Innova extends Car
+{
+
+	void start()
+	{
+
+
+	}
+
+
+	void stop()
+	{
+
+
+	}
+
+	void run()
+	{
+
+
+	}
+
+}
+here Car is the abstract subclass of abstract superclass Vehicle. So Car doesnt need to override any of the abstract member methods of the abstract superclass Vehicle. But it has choosen to override refuelling() abstract member method of abstract superclass Vehicle and that is fine.
+
+Innova is the non abstract subclass of Car. So Innova need to compulsorily override the abstract member methods start(), stop(), and run() of abstract superclass Vehicle which havent yet been overridden in that inheritance tree. Also Innova doesnt need to override the refuelling() method though it was also declared as abstract in abstract superclass Vehicle because the refuelling() abstract member method of abstract superclass Vehicle has already been overridden  by the non abstract subclass Car which is the superclass of Innova.
+
