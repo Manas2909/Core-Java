@@ -1,0 +1,551 @@
+Multi Threading:
+
+
+Multi tasking is of 2 types:
+
+1. Process based multi tasking or the multi processing:
+
+here the different processes of the same operating system are executed in parallel or concurrently. 
+
+e.g imagine we are watching a video clip and listening to an audio clip and at the same time we are typing a word document.
+
+so all these 3 are different processes running on the same operating system in parallel or concurrently.
+
+The processes are heavy weight and they occupy more RAM memory and system resources.
+
+The processes of the same operating system dont share the same address space.
+
+so the context switch time between 2 processes of the same operating system is very large.
+
+The context switch time is the time difference between the instants at which the 2 processes are running at the CPU.
+
+E.G
+
+if the 1st process is running at CPU 8 am and 2nd process is running at cpu after 2 milli seconds then the context switch time between the 2 processs is 2 milli seconds.
+
+so the multi processing is very slow.
+
+
+
+
+
+
+2. Multi threading:
+here different parts of the same java pgm execute in parallel.
+
+The thread is a light weight process and it occupies the less RAM memory and less system resources.
+
+
+The  threads of the same java pgm share the same address space and so the context switch time between them is very less and so multi threading is always faster than multi processing.
+
+
+e.g
+imagine we are having 1 part of the java pgm or 1 thread which is downloading the list of the company names.
+
+The other thread or the other part of the pgm is running concurrently and displaying the share value for each company whose name is downloaded by the 1st thread.
+
+here the 2 threads run in parallel and independent of each other.
+
+
+
+Using multi threading, we can modularise the pgm into different modules or threads which run  independently of each other and are not dependent on whether any part of the pgm is terminated or not.
+
+This increases the speed and the ease of development of pgm, response tim of the system and so we can use multi threading in 3d animation games.
+
+Also we can schedule the threads in our own way and also create a dependency between then if needed and if we want 1 thread to be depedent on the status of another thread in RAM memory.
+
+
+There is only 1 CPU. So at a time only 1 thread can execute at the CPU. But the context switch time between the threads is so less that we feel that they are running in parallel.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MULTI THREADING:
+
+Imagine the predefined main method which is the entry point of execution of the java pgm calls the acc_data1 which in turn calls the acc_data2 method which in turn calls the acc_data3 method.
+
+so a  call stack of method calls is created where each of the new method call is placed on the top of the method which called it in that stack and finally in the call stack created the main method will be at the bottom of the call stack and the acc_data2 method will be at the top of the call stack.
+
+
+
+acc_data3
+acc_data2
+acc_data1
+main
+
+
+
+
+here we feel that every new method call is executed as a separate thread. but here actually the entire call stack represents 1 thread.
+
+
+This thread in the above case is the main thread which is created after the entry into the predefined main method in the java pgm.
+
+In every java pgm there is always a predefined thread called as main thread running in the pgm and this main threads creates other user defined child threads which can run parallel to the main thread.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+LIFE CYCLE OF THREAD:
+
+1. born or new state:
+
+This is the state in which the thread object is just created in RAM mmeory but the thread is not yet an thread of execution which canrun as a separate flow of control in parallel with the main thread.
+
+
+
+If we want to create our own user defined threads there are 2 ways for it:
+
+1. extend the Thread class of java.lang package:
+
+class MyThread extends Thread
+{
+	public void run()
+	{
+
+
+	}
+
+}
+
+here public void run()is a predefined non static member method of Thread class and if our user defined class extends the Thread class in that case our use defined class must override the public void run() method of Thread class in itself and we write the job to be done by the thread in the body of the run() method in the user defined class which extends the Thread predefined class.
+
+If we dont mark the run method as public in the subclass of Thread class and we write the syntax of run with the return type void and no parameter list in the class extending the Thread class, we get a compiler error as per the rules of method overriding.
+
+
+class MyClass extends Thread
+{
+
+	void run()
+	{
+
+	}
+
+}
+
+
+in the Thread clas there is already a public void run() method with the same return type, name and parameter list as the void run defined in class MyClass and so the java compiler feels that the run method of the class MyClass is trying to override the public void run() method of the Thread class and so as per the rules of method overriding we get a compiler error because the access modifier of the overriding method of the subclas  must be public if the access modifier of the superclass name with the same name and same parameter list is public.
+
+
+
+
+
+
+class MyClass extends Thread
+{
+
+
+}
+
+here we wont get any compiler error although we have not overridden the public void run() method of Thread class in the subclass MyClass because method overriding in case of inheritance doesnt need to be compulsarily done in the subclass if the superclass method to be overridden is non abstract and in the Thread class because itself is non abstract class and so there are no methods on class Thread which are marked as abstract.
+
+
+
+
+
+
+
+
+
+
+
+class MyClass extends Thread
+{
+
+	void run()
+	{
+
+	}
+
+}
+
+MyClass mc=new MyClass();
+
+mc.start()
+
+here mc is the object of class MyClass and it extends the Thread class and mso mc is the thread in new state which represents the thread object.
+
+but this mc is not yet a thread of execution and it is still just an object in RAM memory and it wont execute as a s separate thread of execution in parallel with the main thread as yet.
+
+
+public void start() is a predefined non static member method mof the Thread class and mc.start() will convert the thread from the new state to the runnable state where the thread is ready to run and when we call the start() method on the Thread the run() method of that thread gets automatically called and after calling the start() method on the thread object we dont need to call the run() method explicitly and when mc.start() is executed a separate call stack or a thread of execution is created with the run method of that thread at the bottom of the call stack representing the thread mc.
+
+
+
+and now whatever methods we call inside the body of the run() method of the thread mc will be executed one of top of the other in the call stack representing the thread mc.
+
+
+
+class MyClass extends Thread
+{
+
+	public void run()
+	{
+		acc_data1();
+	}
+
+	void acc_data1()
+	{
+
+
+	}
+}
+
+
+MyClass mc=new MyClass();
+
+mc.start();
+
+
+here the separate call stack representing a new thread created using the object mc is loaded and the public void run()method of that thread is called and the run() method is placed at the bottom of the call stack representing the thread associated with object mc.
+
+the run() calls acc_data1 method and so acc_data1 method is place dabove the run method in the same call stack representing thread assciated wih the  object mc and created after start() method was calledon mc.
+
+
+Call stack representing the thread of execution created after calling the start() method on mc:
+
+acc_data1
+run
+
+
+
+
+
+
+
+
+
+class MyClass extends Thread
+{
+
+
+
+}
+
+
+MyClass mc=new MyClass();
+
+mc.start();
+
+here we have not overridden the run method of the Thread class and so when we writ mc.start(), the default run() method of the Thread class is called an it does nothing because its body is emplty in thre Thread class definition. and so here for mc.start() we dont get any compiler nor run time error but we wont get any output on screen.
+
+
+
+
+
+
+
+
+
+
+
+
+
+class MyClass extends Thread
+{
+
+	public void run()
+	{
+		acc_data1();
+	}
+
+	
+}
+
+
+MyClass mc=new MyClass();
+
+mc.run();
+
+so here the run method will execute for sure but not  as apart of a separate thread but on the top of the main ncall stack representing the main thread.
+so if a thread is to be converted from the new state to the executing state the start() method of Thread classmust be called on the thread object.
+
+
+
+
+
+
+
+
+2. If we want to create our own user defined thread in the pgm we can also write a class implementing the Runnable interface of java.lang package:
+
+
+class MyThread implements Runnable
+{
+
+	public void run()
+	{
+
+
+	}
+
+}
+
+
+The Thread class internally is a subclass or an implementing class of the Runnable interface of java.lang package.
+
+The public void run() method is declared as abstract in the Runnable interface.
+
+so here we must compulsarily override the public void run() method of the class MyThread if it implements the Runnable interface because the publc void run() is abstract in Runnable interface and class MyThread implementing the Runnable interface is not abstract and so as per the rules of method overiding class MyThread must compulsarily override the public void run() method of Runnable interface else we get a compiler error.
+
+
+
+
+class MyThread implements Runnable
+{
+
+
+
+}
+
+here the class MyThread directly implements th Runnable interface and class MyThread is not an abstract class and so it must compulsarily override nthe abstract run method.
+
+Because the Thread class also directly implements the Runnable interface and because the Thread class has already provided an empty body or definition for the run() method of  ist superclass Runnable interface, so there is no need for the class MyCl;assto override the run() method compulsarily because the Thread class has already overridden it where the Thread classis the direct superclass of the user defined class and Thread clas is the direct subclass of Runnable interface.
+
+
+
+
+It is better to implement the Runnable interface if we want to create ourn own thrad because if we extend the Thread class we cannot extend other classes needed by the subclassof Thread directly.
+
+class A
+{
+
+}
+class MyClass extends Thread,A
+{
+
+
+}
+
+here multiple inheritance is not allowed in java and so here we get a compiler eror for the class definition of class MyClas where it extends the Thread as welll class A at the sametime.
+
+
+
+
+
+
+
+
+But if our user defined thread class implements the Runnable interface then we can also extend another class at the same time because multiple inheritance is allowed using the interface.
+
+
+class A
+{
+
+
+
+}
+
+class MyClass extends A implements Runnable
+{
+
+
+
+}
+
+here class MyClas is the common direct subclass of class A and in terface Runnable and we wont get any compiler error.
+
+
+
+
+
+
+
+
+
+
+
+
+class MyThread implements Runnable
+{
+
+	public void run()
+	{
+
+
+	}
+
+}
+
+
+
+MyThread t1=new MyThread();
+
+Thread t2=new Thread(t1);
+
+t2.start();
+
+
+here class MyThread doesnt extend the Thread class so it doesnt have any features of the Thread class.
+
+so here if we call the start() methodof Thread class directly on t1 object of class MyThread we get a compiler error because the Runnable interface doesnt contain any abstract method with title as void start(); It is a special method exclusively belonging to the Thread class.
+
+
+
+
+
+so we pass the t1 object of class MyThread where MyThread implements the Runnable interface as the argument to the constructor of Thread class and now we get a thread object called as t2 and now on that object t2 we can call the predefined start() method of the Thread class and then the run() method of MyThread qill be automatically executed as a part of a separate indepedent thread or a call stack.
+
+
+class MyClass extends Thread
+{
+
+	public void run()
+	{
+		
+
+	}
+
+	
+}
+
+
+MyClass t1=new MyClass();
+
+Thread t2=new Thread(t1);
+
+
+t2.start();
+here we have passed the object t1 of the MyClass which extends the Thread class as the argument to the constructor of the Thread class and got object t2, and then we have called the predefined start() method of Thread class on t2.
+
+
+so here again the run method of class MyClass is automatically called as a separate indepedent thread.
+
+but the above 2 steps are not required and we can directlu call the start method on t1 because t1 class Myclass extends the Thread class directly.
+
+
+
+
+
+
+
+
+
+
+2. Runnable state:
+It is the state in which the thread is ready to run but not yet running at the cpu.
+
+
+3. running  state:
+this is the state in which the thread is actually running at the cpu and its public void run() method is actually getting executed at the cpu.
+
+
+4. blocked/waiting/sleeping state:
+This is th state in which the thread is not yet dead but its execution is temporarily halted but the thread is not completely terminated and its instance is still in RAM memory and so thread doesnt need to be restarted but just will resume execution from the point where it had halted after comig back the runnable andd then to the running state.
+
+
+
+5. dead state:
+It is the state in which the thread is completely destroyed from RAM memory and it happens either when the public void run()method of that thread is terminated or when we forcibly destroy the thread using the stop() method of Thread class.
+
+and if the thread must run again it must be restarted by calling the start()method on the thread object again.
+
+
+
+If the thread is in the runnable or running or the blocked or waiting orsleeping  state then it is said to be in the alive state and there is a predefined method of Thread class called as public boolean isAlive() whcih returns true or false based on whether the thread on which it is called is in alive state or not.
+
+
+There are 2 typesof threads:
+
+user thread and daemon thread
+
+If the main method of the java pgm completes execution, the main thread will be terminated and then if the user threads have to still complete execution then the JVM will wait till these threads complete execution and then only the JVM will terminate the pgm execution.
+
+
+but if the thread is a daemon thread and if the main thread terminates before the termination of the daemon thread then the JVM will forcibly terminate the daemon threads and dstroy them and then also terminate the java pgm execution.
+
+
+by default the thread is a user thread.
+
+
+There is a predefined non  static method of the Thread class called as public void setDaemon(boolean flag)
+
+if we call this setDaemon(boolean flag) on the thread object and we pass true value as the flag argument then the thread will be converted from user to a daemon thread.
+
+if we dont call the setDaemon() method at all on the user defined thread created in that case by default the thread is a user thread. 
+
+
+
+
+
+
+
+
+
+
+If the start method is called on the thread when it is in the alive state we get java.lang.IllegalThreadStateException run time exception class,
+
+
+class MyClass extends Thread
+{
+
+	public void run()
+	{
+		start();
+
+	}
+
+}
+
+MyClass mc=new MyClass();
+
+mc.start();
+
+here when the run method of the thread created represented by mc, executes as a separate thread, then we have called the predefined start method of the Thread class inside the run method of the user thread so we get an IllegalThreadStateException run time exception.
+
+
+
+
+
+
+
+
+
+
+class MyClass extends Thread
+{
+
+	public void run()
+	{
+		
+
+	}
+
+
+	public void start()
+	{
+		super.start()
+
+	}
+
+}
+
+MyClass mc=new MyClass();
+
+mc.start();
+
+here we have overridden the predefined Thread class start method in the user defined class MyClass and so mc.start() will call the user defind overriding start method in the class MyClass and this start wont create a separate call stack or a thread of execution but the overriding start method will be executed in the main call stack as a part of the main thread.
+
+but inside the overriding start method of class MyClass we have written super.start and called the predefined start method of the Thread class and then the new call stack or the new thread reprsentd by MyClass is created and the run method of the class MyClas is executed in that new call stack or new thread at the bottom of the call stack.
+
+If we didnt write super.start then no new thread would be created and even if we called the run explicitly the run would be executed as a part of the main call stack.
