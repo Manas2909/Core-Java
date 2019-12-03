@@ -1,0 +1,6 @@
+homework
+1. accept a number from user and find its factorial
+2. accept 2 numbers from user and find power of 1 number raised to 2nd number
+3. accept 2 nos and find their LCM and GCD
+4. accept a string from user and find total number of alphabets digits and special characters in it and also count number of upper case an lower case alphabets and convert the case of the alphabets and display the string in converted case
+

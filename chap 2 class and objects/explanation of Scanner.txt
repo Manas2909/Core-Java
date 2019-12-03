@@ -1,0 +1,10 @@
+Scanner class:
+Scanner is a predefined class of java.util package.
+
+Scanner sc=new Scanner(System.in);
+we directly pass System.in i.e. object of InputStream class as argument to constructor of Scanner class and so a new object of Scanner class is created which is directly connected to keyboard i.e. System.in. We have assigned the reference to the new Scanner class object created to the reference variable sc of Scanner class.
+
+so because the Scanner ckass object is directly connected to keyboard System.in, so it reads inputs faster than BufferedReader class. But using Scanner class object we cannot read space characters as a part of the string input value in case the user types a multi word string with one or more spaces in it.
+
+so to read primitive values like int,float,char etc. we use the Scanner class object and to read String input values we use BufferedReader class object.
+

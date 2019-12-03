@@ -1,0 +1,78 @@
+Class and Objects:
+
+class is a user data type in java defined using class keyword.
+The class is a collection or variables and functions where the variables declared inside the class definition are the data members of class and the functions defined inside class definition are member methods of the class.
+
+class Student
+{
+	String name,collegename,gender;
+String is a predefined class of java to declare variable to store words or sentences.
+	int id,marks,age;
+
+	void acc()
+	{
+		member method to accept input values from user into data members name,collegename,gender,id,marks,age
+
+	}	
+
+	void display()
+	{
+		member method to display output values of data members name,collegename,gender,id,marks,age
+
+	}
+}
+
+remember that in java the class definition never ends with semi colon unlike in cpp.
+
+so here we have defined acc() and display() as member methods of class Student and name,id,gender,collegename,marks,age as data members of class Student.
+
+
+
+Object:
+It is the physical instance of a class. We first define a class and then only we can create multiple objects of the class. So class is the data type of the object.
+
+e.g. suppose class is animal, then objects are lion,tiger,deer etc.
+
+
+
+To create object in java we use new keyword on class name.
+
+so to create a physical object of class Student defined above, we write statement as:
+Student s1=new Student();
+
+here new Student() calls the constructor of class Student which will create a new object of class Student on heap memory, which is part of the RAM memory and stores the physical objects of any class type created using new keyword during pgm execution.
+
+
+Constructor is a special member method of the class with same name as class name and no return type and it may or maynot have parameters.
+
+
+when we dont define a constructor explicitly for the class, then java compiler automatically creates a default non parameterised constructor for the class definition at compile time.
+
+so in the statement new Student() above, the default non parameterised constructor of class Student is being called which will create a new physical object of class Student on heap memory and the address or reference or hashcode of the object created on heap memory is assigned to variable named s1 of class Student in the statement Student s1=new Student().
+
+so s1 is not the object of class Student but is that variable which stores the address or hashcode or reference to the area in heap memory where the object is created by new Student(). So s1 is called as reference variable of class Student.
+NOTE:
+WE can name a reference variable using any name and following same rules of naming variables in java,c,c++.
+
+When we use the dot operator on the reference variable, then we can access the members of that object whose reference is stored in the reference variable.
+
+so s1.name,s1.id etc. access the data members name,id... of that object of class Student whose reference is stored in s1.
+
+also s1.acc() and s1.display() will call the member methods on the object of class Student whsoe reference is in s1 and then inside the body of acc() and display() member methods the input values will be accepted into data members of object referred to by s1 and then displayed on screen.
+
+
+RULE:
+Every method defined in the java pgm must be a member method of some or the other class definition in java pgm. so we can never define any method in java pgm which is not member method of any class definition of that java pgm.
+In cpp, the main() method is always defined as an independent function which is not member function of any class in the cpp pgm. But in java even the main() method defined must be a member method of some or the other class definition of that java pgm.
+
+
+
+The size of the data types in java is always fixed irrespective of the platform on which we are executing the pgm. This is one reason why java is a platform independent or portable language.
+
+The other reason why java is a platform independent language is because the java compiler never directly generates an .exe file but generates an intermediate code after compiling the pgm called as byte code.
+
+so for every class defined in the java pgm using class keyword a .class file or byte code file is generated for that class definition in the java pgm. Then the JVM(JAVA VIRTUAL MACHINE) at runtime will convert the .class to .exe file.
+
+
+Remember that JVM itself is platform dependent but the .exe file it generates from the byte code is always platform independent.
+
