@@ -1,0 +1,120 @@
+ArrayList al=new ArrayList();
+
+
+non generic collections. legacy collection.
+
+non type safe collection
+
+
+al.add("kaveesh nadkarni");
+
+al.add("vivek anand nadkarni");
+
+
+
+compiler error
+String str=al.get(0);
+
+
+
+String str=(String)(al.get(0));
+
+
+
+
+
+
+
+
+ArrayList<String> al=new ArrayList<String>();
+
+
+
+void acc_data(ArrayList al1)
+{
+
+	al1.add(new Integer(4));
+no compiler error
+
+	String str=(String)(al1.get(0));
+no compiler error but ClassCastException
+}
+
+
+
+acc_data(al);//no compiler error
+
+
+
+
+
+class A
+{
+
+
+}
+
+
+class B extends A
+{
+
+
+}
+
+
+A a1=new B();
+
+
+
+
+
+ArrayList<A> al=new ArrayList<B>();
+
+generic type 
+
+
+
+ArrayList<? extends A> al=new ArrayList<B>();
+
+
+al.add(new B());
+
+compiler error
+
+
+
+
+
+ArrayList<? super B> al=new ArrayList<A>();
+al.add(new B());
+
+no compiler error
+
+
+
+
+
+wild card characters
+
+Enumeration, Iterator,ListIterator are all cursors in java
+
+
+         Animal
+Cat	Dog
+
+
+
+void acc_data(Animal arr[ ])
+{
+
+	arr[0]=new Dog();
+//ArrayStoreException which is a runtime exception. no compiler error
+}
+
+
+
+Dog d[ ]={new Dog(),new Dog()};
+
+Cat c[ ]={new Cat(),new Cat()};
+
+acc_data(c); 

@@ -1,0 +1,22 @@
+Sets:
+
+
+
+hashcodes
+
+null
+
+HashSet<String> hs=new HashSet<String>(int capacity,float loadfactor);
+
+16,0.75f
+
+12
+
+
+
+
+HashSet 
+LinkedHashSet
+
+
+

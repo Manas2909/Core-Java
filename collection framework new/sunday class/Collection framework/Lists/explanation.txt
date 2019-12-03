@@ -1,0 +1,583 @@
+/*Collection Framework:
+
+Array is a group of elements of the same data type and  a fixed size. Array is an indexed collection of elements.
+
+The size of the array is fixed and cannot be changed dyanamically during the pgm execution and we cannot increase or decrease the array size dyanamically.
+
+int arr[ ];
+arr=new int[6];
+
+here arr is the 1dimensional array reference variable of the data type int. when we declare the array reference variable we never mention the size of the array.
+
+But when we are creating the 1d array object we mention the size of the array object.
+
+so here we have created a 1d array object of size 6 and if we want to change the size of the array, we cannot change the array object to which arr refers.
+
+we need to create a new array with a new size and then we need to assign it to the array reference variable arr.
+
+so if we want to make arr have the size as 4,
+arr=new int[4];
+so this means that we cannot make any changes in the 1d array object which arr is currently referring to and its size cannot be increased or decreased dyanamically.
+
+If we want to create change the size of arr we will need to reassign arr a new 1d array object of the data type int and with that particular new size.
+
+so here a lot of RAM memory space is wasted because everytime we want to change or modify the size of arr, we will need to create a new array object of int data type using the new keyword on the heap memory.
+
+
+
+
+2. In case of arrays we can store only homogeneous elements means elements of only a particular data type.
+
+If we want to store elements of different data types into the array, we will need to declare the array reference variable of the Object class which is the by default superclass of every class in java and in java.lang package.
+
+
+Object arr[ ];
+
+here arr has the class type as Object and so we can store objects of any class type inside the elements of arr.
+
+arr[0]=new String("abc");
+
+here String class is the subclass of the Object class and as per the rule of the java polymorphism, we can declare the reference variable of the superclass and we can assign it the object of the subclass.
+
+so here arr[0] reference type is Object and it is assigned the object of class String with value "abc".
+
+so the above statement wont give any compiler error.
+
+so same way we can store objects of different class types into different elements of arr because the class type of arr is Object.
+
+
+
+
+
+
+
+
+We can store elements of the primitive data types in array and also we can store elements of class type in array.
+
+int arr[ ];
+
+here we can store only elements of int primitive data type into arr.
+
+
+
+Student arr[ ];
+
+here we can store objects of only the Student class or the subclass of Student into elements of arr.
+
+
+
+
+
+
+The arrays are not based on any predefined data structure like linked list,stacks,queues etc and so if we have to implement these data structures in java using arrays we have to write our own logic for that and this make the pgm very complicated.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Collection:
+It is a object which can store other objects inside it.
+
+We can dyanamically increase or decrease the size of the collection object in java which is not possible in case of arrays where we have to create our own new array object whenever we want to change the size of the array.
+
+
+We can store homegeneous as well as heteregeneous elements inside the collection object which means we can store elements of the same or the different class types inside the collection.
+
+
+
+Inside the collection, we can store only  the elements of class type i.e objects.
+
+Like array we cannot have a collection storing primitive data type elements inside it.
+else we get a compiler error.
+
+
+
+
+
+
+
+The collection api has a set of predefined classes like LinkedList,Stack,Queue etc. which are based on the predefined data structures like linked list,stack,queues etc and just by creating objects of these predefined classes of the collection API and by adding,removing,processing elements inside the object of the class in the collection API, we can perform all the operations needed for data structure processing just by calling the predefined methods of that particular class.
+
+e.g If we create an object of the LinkedList class then when ever we add elements to the linked list, the elements are internally stored in the doubly linkedlist format where the next element stores the address or the reference of the previous element and the previous element stores the reference of the next element and we dont need to do any manual logic based  operations like we do in C pgm to create and store the elements in linked list format.
+
+We just need to use the pre defined methods of the LinkedList class.
+
+
+
+so the collections are like the data structures in java.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Collection Framework:
+It is a set of classes and interfaces of java.util package which are used to create such objects which can store other objects inside them.
+
+
+
+The Collections is a predefined class of java.util package and the Collection is a predefined interface  of the java.util package.
+
+
+
+
+
+Collection interface is the super interface of all the predefined main interfaces of the collection api.
+
+
+List interface,Queue interface and Set interface are the predefined interfaces which are the sub interfaces of the Collection interface.
+
+
+
+1. List interface:
+This is used to create lists where we the elements are stored in the list in the same order in which they are entered through the java pgm. So the insertion order is preserved in case of list.
+
+We can store duplicate elements inside the list which is not possible in case of sets.
+
+duplicate elements means elements with duplicate values.
+
+
+We can store multiple null values inside the list or we can store null elements with null values inside the list.
+
+In the list the elements can be accessed by using an index like we do for the 1d array and the counting of the elements in the list begins from 0.
+
+
+2. Set interface:
+It is the sub interface of the Collection interface of java.util package.
+
+Set interface is used to create sets in java, where the insertion order of the elements in the set is not preserved. The order in which the elements are inserted in the set is not same as the order in which they are stored inside the set.
+
+We cannot store duplicate elements in the set. i,e we cannot have elements with the duplicate values inside the set.
+
+We can store the null value only once inside the set because duplicate elements are not allowed in the set.
+
+
+In set we cannot access elements using an index.
+
+
+
+
+3. Queue interface:
+It is the sub interface of the Collection interface. It is used to create queue in java which are used to store elements prior to processing them.
+
+
+In queue the elements are accessed in the First in First out order.
+
+There is a sub interface of Queue called as Deque interface which is the double ended queue.
+
+
+here we can add elements at the start and the end i.e the both sides of the queue.
+
+
+
+
+
+
+
+
+
+
+
+4. Map interface:
+It is not the sub interface of the Collection interface.
+
+This is because in the case of maps which are created from the Map interface, every individual element  of the map is a combination of 2 more sub elements.
+
+The 1st sub element is the key element and the 2nd sub element is the value element.
+
+so every element of the map has a key and a value associated with it and we insert the key and get the value.
+This will be discussed in more details further.
+
+so the keys of the individual elements of the map must be unique.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+List interface:
+It is used to create lists.
+
+The classes implementing the List interface are:
+ArrayList class,LinkedList class,Vector class and Stack class.
+
+
+ArrayList class:
+It is the sub class of List interface.
+
+It is based on the data structure called as resizeable array.
+
+It has all the features of lists because it implements the List interface.
+
+In the ArrayList class, the predefined methods of the ArrayList class are not synchronized. so this means that multiple threads can operate on the same array list object. and so array list object is not thread safe.
+
+and array list is also faster.
+
+
+
+
+*/
+
+//array list class practicals
+
+import java.util.*;
+
+
+class Collection1
+{
+	ArrayList<String> al=new ArrayList<String>();
+
+/*
+we know that the array list is a collection. and so we can add objects of the same or different class types inside the array list.
+
+but if we create the ArrayList class object as:
+ArrayList al=new ArrayList();
+
+here we have created the ArrayList class object without mentioninbg any class type. 
+so here the ArrayList class object created al is a non generic or non type safe array list collection.
+
+This means we can add elements or objects of the same or different class type into the above array list object al where its generic type is not mentioned.
+
+
+now suppose we store 3 objects into al as follows
+al.add(0,new String("abc"));
+al.add(1,new Student());
+al.add(2,new Animal());
+
+
+here we have added object of String class with value "abc" at index 0 in al array list, object of class Student at index 1 in the array list al and the object of class Animal at index 2 in the arraylist al.
+
+now suppose we want to retrieve the element at index 0 in the al which is a  String class.
+
+
+here add() is a predefined non static method of the ArrayList where we add the element at the index in the array list where the index is specified as the 1st argument to the add()method and the element is specified as the 2nd argument to the add method.
+
+here because al array list doesnt have any class type mentioned while creating the al object it is a heteregenous array list and we can add elements of any class type into al as shown above.
+
+String str=al.get(0);
+
+here get() is a non static method of the ArrayList class and 0 is the index of the element to be retrieved from the array list al.
+
+here the al.get(0) will return an object of String class  which is located at index 0 in the array list but whose reference type is of Object class whcih si the by default superclass of every class in java.
+
+so here we have directly assigned al.get(0) to str which is a reference variable of String class and because get(0) returns the instance of String class but in form of reference type of the Object class so we must convert the return value of al.get(0) into String class type.
+
+
+so we get a compiler error for String str=al.get(0);
+
+
+In  java we know that as per the rules of polymorphism and inheritance we can declare the reference variable of the superclass and we can assign it the object of the direct or indirect sub class.
+
+
+class A
+{
+
+
+}
+
+
+class B extends A
+{
+
+
+}
+
+
+class C extends B
+{
+
+
+
+}
+
+
+A obj=new B();
+
+A obj1=new C();
+
+here obj and obj1 are the reference variables of superclass A but they are assigned the objects of classes B and C resp and we wont get any compiler error.
+
+same way al.get(0)returns the physical object of class type String which is stored in the array list al at index 0 but the reference variable to which the al.get(0) is assigned must be of the type Object.
+
+Object o=al.get(0);
+
+here we wont get any compiler error because o is reference variable of Object class but if we want to assign al.get(0) to a String class reference variable, we will need to convert al.get(0) into String as shown below:
+
+String str=(String)(al.get(0));
+
+
+here we are converting the reference type of the String class object with value "abc" from the superclass Object type to the sub class String type.
+
+
+al.get(0) returns the instance whose reference is of the type Object and at index 0 in array list al, because we have not specified any class type or generic type while creating al object and it is a heteregenous array list and so the java compiler doesnt know that what is the class type of the element or object stored at that index in al because we can store elements of any class type into al because it is a non type safe array list.
+
+
+so whenever we call the get() method on the collection arraylist whose class type is not fixed and which can contain elements of any class type remember that the reference returned is always of the Object class and so if we are storing the reference to the element in a reference variable of some other particular class type, then explicit type conversion or narrowing conversion is required of the return value of get method from Object class to that particular sub class type.
+
+
+ArrayList<String> al=new ArrayList<String>();
+
+
+here when we created the object of the array list al, we have mentioned String class type as the generic type of the al ArrayList.
+
+remember the generic type of the collection when creating the object of that collection and assigning it to the reference variable of that collection type is always mentioned insiude the <> brackets.
+
+so here String is the generic type of al and we can add only objects of String class type into al else we get a compiler error.
+
+
+al.add(new Student());
+
+here we get a compiler error because we have added object of the Student class type into al.
+
+
+here al is a type safe collection or a type safe array list means we can add only the objects of the String class type into al because we have mentioned String as the generic type of al.
+
+
+
+here if we write:
+String str=al.get(0);
+
+here al.get(0) returns the object of STring class stored at index 0 in the array list al and the reference type of the object or element returned is also of the String class type only and not of the Object class type because we had mentioned String as the generoc class type or the data type of the array list object al while declaring al and creating the object of ArrayList class using new keyword and assigned to al.
+
+
+
+so here the above code statement wont give any compiler error because al is a generic or a type safe array list whose fixed class type is String and so the java compiler also knows that what is present at any index location in the al array list is of the String class type.
+
+
+
+
+
+ArrayList<String> al=new ArrayList<String>();
+
+here an ArrayList class object with default initial capacity as 10 is created, because we have not mentioned any capacity while creating the object of the ArrayList class as the argument to the constructor of the ArrayList class.
+
+The default initial capacity of al array list object would also be 10 even if we hadnt mentioned String as the class type or the generic type of al and mentioned al as a non type safe heteregenois array list.
+
+
+
+
+when ever the size of any array list becomes equal to the capacity the n the capacity of the array list is automatically increased by the following given predefined formula:
+
+new capacity=(old capacity*(3/2))+1;
+
+
+*/
+		al.add(0,"kaveesh nadkarni");
+
+		al.add(1,"vivek anand nadkarni");
+
+		al.add(2,"sangeeta nadkarni");
+
+		al.add("vaibhavi nadkarni");
+
+/*
+
+when we call the add method of the ArrayList class without mentioning the index of the element where the new element is to be added then the new element is always added by defaut at the end of the array list after all the existing elements of the array list.
+
+so here the element "vaibhavi nadkarni" is added at index 3 in the array list al automatically
+*/
+
+
+		System.out.println("\n the current elements in array list after adding 4 elements are "+al);
+
+
+
+/*
+
+There is a predefined class called as Object class of java.lang pckage.
+
+this Object class has a predefined method called as 
+
+public String toString()
+{
+
+
+}
+
+
+
+Imagine there is a class called as Student.
+
+class Student
+{
+
+	String name;
+	int id;
+
+	Student(String name1,int id1)
+	{
+		name=name1;
+		id=id1;
+
+	}
+
+
+
+}
+
+
+Student s=new Student("abc def",3);
+
+so here the  name and id of the object s of class Student will be "abc def" and 3 resp.
+
+System.out.println(s);
+
+
+here we have directly passed the object s of class Student as the argument to System.out.println.
+
+so here the JVM calls the toString() method on the object s automatically and inherited from the class Object which is the superclass of Student by default.
+
+so whenever we pass any object of any class type as the argument to System.out.println() or System.out.print() method directly then the JVM will call the toString() method by default on that object.
+here Jvm first checks which is the class type of the object and then the JVM checks if the class type of the object has overridden the public String toString() method of superclass Object or not.
+
+and if the class type of the object passed directly to System.out.print() or 	System.out.println() has not overridden the public String toString() method of the class Object, then the predefined method already present in the superclass Object and inherited into that subclass which is the class type of that object passed as the argument to System.out.println() or print(),will be called  and the predefined method of class Object whose name is public Sting toString() which has been called on the instance passed as the argument to System.out.println() or print() will return the 
+
+class name of that instance@hashcode value or the address of that instance in RAM mmeory.
+
+in the above format only.
+
+
+
+
+here Student class hasnot overridden the public String toString(){    }method of class Object.
+
+
+now assume that the hashcode or the address of the object s of class Student in RAM memory is 1234.
+
+then when  the statement:
+System.out.println(s) where s is the object of class Student is executed, then because the class Student has not overridden toString() method of class Object, so the predefined toString() method already present in class Object is called on s where the class Student which is the class type of s has inherited the toString() method.
+
+and now the output value displayed on screen for System.out.println(s), will be
+Student@1234.
+
+
+imagine the class Student has overridden the public String toString() method.
+
+
+class Student
+{
+
+	String name;
+	int id;
+
+	Student(String name1,int id1)
+	{
+		name=name1;
+		id=id1;
+
+	}
+
+	public String toString()
+	{
+		return(name+" "+id);
+
+	}
+
+}
+
+
+Student s=new Student("abc def mno",19);
+
+System.out.println(s);
+
+here again the toString() method is called on s but the JVM sees that the class type of s which is the class Student has overridden the public String toString() method, and so the overriding method inside the subclass Student gets called on s and here whatever value is returned by the toString() method already present inside the class Student which is the class type of s is displayed on screen.
+
+so output will :
+abc def mno 19
+
+
+The rule says that whenever we directly pass a collection object which in this case is the array list al directly as the argument to the System.out.println() or System.out.print() method, then the toString() method is automatically called on every individual element or object of that collection which in this  case is the array list al.
+and if the class type of the collection has not overridden the toString() method of the Object class then the predefined toString()  method already present inside the Object superclass is called and this will return the classname of the element@hashcode or address of the element in RAM memory.
+
+
+but if the class type of every individual element of the collection al has overridden the predefined toString()method of the superclass Object then whate evr value is returned by the toString() method defined explicitly in the class type of thhat element is returned by the toSTring()methosd called on that element of the collection.
+
+
+When the collection object is directly passed as the argument to the System.out.println() or the System.out.print() method, we know that the toString() method is called by the JVM on every individual element of that collection and whether the collection has a generic type or a particular class type or not, still the return values of the toString()method when called on every element of the collection will be displayed in:
+[      ] brackets when the collection object is passed directly as the argumenet to the System.out.println() or the System.out.print() method.
+
+
+The String class and all the wrapper classes like Integer,Float, etc of java.lang package has already internally overridden the public String toString() method of the class type Object into their own class definition in the java system library.
+
+Integer i=new Integer(10);
+
+here we have created an object i of the Integer wrapper class and value 10
+
+System.out.println(i);
+
+here we have passed i object of the Integer wrapper class directly as the argument to System.out.println().
+
+so here Integer wrapper class has already overridden the predefined toString()method of classObject and this returns the value stored in that Integer wrapper class object which is 10 now in the String format.
+
+so System.out.println(i); will display output as:
+10
+
+
+
+The toString()method is overridden in the same way in all the other wrapper classes.
+
+String str=new String("abc");
+
+or
+
+String str="abc";
+
+
+System.out.println(str);
+
+String class has also overridden the toString() method of the Object class and insuch a way that the value returned by it is the actual string value stored in that object of the String class.
+
+so here the output will be
+"abc". 
+
+we get the same above output irrespective of whether the str refers to  "abc" created using new keyword on the heap memory or whether it refers to "abc" created and assigned to str without using the new keyword on string pool memory.
+
+
+
+here in the pgm we have array list as al and which is a type of a collection. so when we pass al as the argument directly into System.out.println(), then we get the output as:
+
+[kaveesh nadkarni,vivek anand nadkarni,sangeeta nadkarni,vaibhavi nadkarni]
+because the generic type of the al object is String.
+
+*/
+
+	}
+
+
+	public static void main(String args[ ])
+	{
+		Collection1 c1=new Collection1();
+
+		c1.opns();
+
+	}
+
+}			

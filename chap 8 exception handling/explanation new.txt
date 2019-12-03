@@ -1,0 +1,41 @@
+/*
+Assertions:
+AssertionError is a predefined class of java.lang package.
+It is the subclass of java.lang.Error class and so when it occurs it cannot be caught or handled and so the pgm execution will be abruptly terminated when the AssertionError occurs.
+
+The assert keyword in java is used along with a condition to generate an AssertionError during the pgm execution suppose the condition used with the assert keyword in false.
+
+But the assertions are disabled by default at runtime, and so the assert keyword will not be enabled by default at runtime.
+
+So to enable assertions at runtime, we use the -ea flag or the -enableassertions flag of the JVM at runtime.
+
+
+
+write a java pgm which will generate assertionerror suppose denominator value is 0 and which will display the division result properly suppose no AssertionError occurs.
+
+
+
+if we write:
+
+java -ea -dsa Mainclassnameofpgm
+
+then it means that the assertions will be enabled for the executing pgm but -dsa means that the assert keyword in system defined predefined classes of java system library will be disabled.
+
+java -ea -da:abc.def... Mainclassnameofpgm
+
+then it means that the assertions will be enabled for the executing pgm but will be disabled for all classes in the abc.def package and in all its sub packages.
+
+
+java -da -ea:abc.def.Pgm1 Mainclassnameofpgm
+
+then it means that the assertions will not be enabled for the executing pgm but will be enabled for the class Pgm1 of package abc.def.
+
+
+
+
+
+Additional features of exception handling in Java 8:
+
+1.
+
+*/

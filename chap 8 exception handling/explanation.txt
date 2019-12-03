@@ -1,0 +1,302 @@
+exception handling:
+exception is a runtime error which always occurs during pgm execution. It alters the flow of execution of the pgm and when an exception occurs, then the JVM automatically creates an implicit object for the exception class type whose exception occurred and then checks whether there is any exception handling code in the method where the exception occured. If there was exception handling code inside the method where the exception occured then the exception object would be caught by the parameter of the matching catch block where the parameter of the matching catch block would be a reference variable of some exception class type to which the exception object can be assigned. After the exception is caught and handled by the matching catch block inside the method where the exception occured, then the execution of the method continues normally from the next statement after the exception handling code inside the method definition. But If there is no exception handling code inside the method where the exception occured then JVM terminates the execution of the method where the exception occurred and the control goes to its calling method where again the JVM checks whether the calling method has any exception handling code. If there was exception handling code inside the calling method to which the exception object was propogated by JVM from that method where exception actually occured, then the exception would be caught by the parameter of the matching catch block. After the exception is caught and handled by the matching catch block inside the calling method , then the execution of the method continues normally from the next statement after the exception handling code inside the calling method definition. But If there is no exception handling code inside the calling method  then JVM terminates the execution of the calling method also and the control goes to its calling method and process continues and suppose none of the calling methods on the stack till the main() is reached, have an exception handling code to catch and handle the exception which occured then the execution of all those calling methods is terminated and control comes to main() and again in main() if there is no exception handler then the JVM calls its default exception handler which will terminate the execution of main() method and display the details regarding the exception in following format:
+name of exception class type(of the exception which occurred):some message describing the exception
+
+exception stack trace
+i.e. at which line number and in which method did the exception occur......
+main()
+and then execution of the pgm is also terminated.
+
+
+
+e.g.
+class MyClass1
+{
+	void display1()
+	{
+		int num=5,den=0;
+
+		int res=num/den;
+
+		System.out.println("\n the division result is "+res);
+
+	}
+
+	public static void main(String args[])throws IOException
+	{
+		MyClass1 mc1=new MyClass1();
+		mc1.display1();
+
+	}
+}
+
+here during execution of statement int res=num/den,because value of den variable is 0, so the statement int res=num/den generates an java.lang.ArithmeticException where the JVM will generate an implicit object of the ArithmeticException class type, and because there is no exception handling code inside the display1() method to handle the ArithmeticException object, so the execution of display1() is terminated and the statement System.out.println(...) is not executed inside display1() method, and the ArithmeticException class object is propogated to the calling method main() and because there is no exception handling code in main() method also,so the execution of the main() method and the pgm is abrutly terminated and the following is displayed by JVM on screen:
+
+java.lang.ArithmeticException:some message describing the exception
+
+line no. of line int res=num/den in display1() where the ArithmeticException occured
+line no. of statement mc1.display1() inside main()
+
+
+class MyClass1
+{
+	void display1()
+	{
+		int num=5,den=0;
+		try
+		{
+		int res=num/den;
+
+
+		System.out.println("\n the division result is "+res);
+		}
+
+		catch(ArithmeticException e1)
+		{
+			System.out.println("\n the denominator can never be 0");
+	
+		}
+
+		System.out.println("\n end of display1");
+	}
+
+	public static void main(String args[])throws IOException
+	{
+		MyClass1 mc1=new MyClass1();
+		mc1.display1();
+
+	}
+}
+
+here during execution of statement int res=num/den,because value of den variable is 0, so the statement int res=num/den generates an java.lang.ArithmeticException where the JVM will generate an implicit object of the ArithmeticException class type, and because there is a matching try catch block i.e. there is a matching exception handling code inside the display1() method to handle the ArithmeticException object, so the execution of display1() is not terminated but the System.out.println() statement which displays value of res variable after the statement int res=num/den inside the try block is skipped and the control comes to the matching catch block which catches the ArithmeticException object generated by the try block statement and assigns it to its parameter e1 and the statement System.out.println(...) inside the catch block is executed , and also the System.out.println() and other statements(if any) after the catch block inside the display1() method body are also executed.
+
+
+
+
+
+Exception class heirarchy:
+	java.lang.Object class
+
+	java.lang.Throwable class
+
+java.lang.Error class		java.lang.Exception class
+			 	java.lang.RuntimeException
+				class
+
+java.lang.AssertionError	
+class
+
+the java.lang.Throwable class like many other classes in java is the direct subclass of java.lang.Object class. The java.lang.Throwable class has 2 direct subclasses java.lang.Error class and java.lang.Exception class(Hierarchial inheritance).
+
+java.lang.Error class and all its direct or indirect subclass types are used to create the runtime errors in java where runtime errors are different from exceptions because unlike exceptions the runtime errors cannot be caught and handled and so if an error occurs in the pgm which is an object of the class type which is the direct or indirect subclass type of java.lang.Error class then the pgm execution is abruptly terminated always. The java.lang.AssertionError class is the direct subclass of java.lang.Error class.
+
+the java.lang.Exception class which is the other direct subclass of java.lang.Throwable class and all other direct or indirect subclasses of Exception class are used to create exceptions in java which can be caught and handled by writing matching try catch blocks inside the code.
+
+java.lang.Runtime exception class is the direct subclass of java.lang.Exception class and the RuntimeException class and all its direct or indirect subclass are used to generate unchecked exceptions in java. The exception classes which are the direct or indirect subclasses of java.lang.Exception class but which donot have any inheritance relation with the java.lang.RuntimeException class are used to create checked exceptions in java.
+
+
+
+
+Types of exceptions in java:
+1. Checked exception:
+they are those exceptions which occur at runtime during pgm execution but the possibility or probability of their occurance at runtiem is detecetd by java compiler at compile time itself. So there is a rule of the java compiler that method in which the checked exception may occur must either handle the checked exception inside its body using matching try catch block or must atleast declare the checked exception in its title using throws keyword. If the method in which the checked exception may occur neither handles nor declares the checked exception in its definition then we get a compiler error.
+
+import java.io.*;
+import java.util.*
+
+class MyClass1
+{
+
+	BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+	Scanner sc=new Scanner(System.in);
+
+	String str;
+	int i;
+	void acc()throws IOException
+	{
+		System.out.println("\n Enter string value and integer value");
+
+		str=br.readLine();
+		i=Integer.parseInt(sc.next());
+
+	}
+
+	public static void main(String args[])throws IOException
+	{
+		MyClass1 mc1=new MyClass1();
+		mc1.acc();
+
+	}
+}
+
+
+here in the above code we have called br.readLine() inside the body of the  acc() method definition and because br.readLine() may generate a checked exception java.io.IOException so we must compulsorily either handle or declare the IOException in the acc() definition else compiler error. Because we have declared the IOException in title of acc() definition so we must also handle or declare the IOException in the calling method i.e. the main() definition also else compiler error.
+
+import java.io.*;
+import java.util.*
+
+class MyClass1
+{
+
+	BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+	Scanner sc=new Scanner(System.in);
+
+	String str;
+	int i;
+	void acc()throws IOException
+	{
+		System.out.println("\n Enter string value and integer value");
+
+		str=br.readLine();
+		i=Integer.parseInt(sc.next());
+
+	}
+
+	public static void main(String args[])
+	{
+		MyClass1 mc1=new MyClass1();
+		try
+		{
+		mc1.acc();
+		}
+
+		catch(IOException e1)
+		{
+
+
+		}
+	}
+}
+
+again no compiler error for above code because we have handled the IOException instead of declaring it now in main() definition.
+
+import java.io.*;
+import java.util.*
+
+class MyClass1
+{
+
+	BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+	Scanner sc=new Scanner(System.in);
+
+	String str;
+	int i;
+	void acc()
+	{
+		System.out.println("\n Enter string value and integer value");
+		try
+		{
+		str=br.readLine();
+		i=Integer.parseInt(sc.next());
+
+		}
+
+		catch(IOException e1)
+		{
+
+
+		}
+	}
+
+	public static void main(String args[])
+	{
+		MyClass1 mc1=new MyClass1();
+		
+		mc1.acc();
+		
+
+	}
+
+}
+
+again no compiler error for above code because we have handled the IOException instead of declaring it now in acc() definition and because we have not declared the IOException in acc() definition title so we dont need to handle nor dedclare the IOException in main() definition.
+
+
+
+
+
+import java.io.*;
+import java.util.*
+
+class MyClass1
+{
+
+	BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+	Scanner sc=new Scanner(System.in);
+
+	String str;
+	int i;
+	void acc()throws IOException
+	{
+		System.out.println("\n Enter string value and integer value");
+		try
+		{
+		str=br.readLine();
+		i=Integer.parseInt(sc.next());
+
+		}
+
+		catch(IOException e1)
+		{
+
+
+		}
+	}
+
+	public static void main(String args[])
+	{
+		MyClass1 mc1=new MyClass1();
+		
+		mc1.acc();
+		
+
+	}
+
+}
+
+now we get compiler error for above code because we have handled the IOException and declared IOException now in acc() definition and because we have declared the IOException in acc() definition title so we need to handle or dedclare the IOException in main() definition.
+
+
+NOTE:
+Though the possibility of occurance of checked exceptionb is detected by java compiler at compile time, but the checked exception being an exception always occurs at runtime only.
+
+java.lang.InterruptedException(in multi threading),java.sql.SQLException(in jdbc pgms),java.lang.ClassNotFoundException etc, are all checked exceptions.
+
+
+Declaring an exception using throws keyword has no effect at runtime. This means that suppose an exception is declared in a method definition title then it doesnt mean that the exception will surely occur during the method execution at runtime. Also if it occurs then it will be due to some problem in the code or some internal error but not because we have declared the exception using throws keyword. Also if an exception occurs during the method execution and if we have not written exception handling code in the method definition and just declared it using throws keyword then the execution of the method will be terminated. So its always better to write exception handling code using matching try catch blocks for any code in the pgm which may generate checked or unchecked exception in the body of a metho definition.
+Generally we declare the exception using throws keyword only in case of checked exceptions to avoid compiler error because checked exception generally never occur due to fault in the program code but occur due to some internal problem.
+
+
+
+
+
+
+unchecked exception:
+they are those exceptions which occur at runtime and their possibility of occurance at runtime is  not known to java compiler at compiler time. So there is no need to write code to handle or declare the unchecked exception in the pgm and we will not get a compiler erro if we dont handle nor declare the checked exception in the method definition where it may occur at runtime.
+
+e.g.
+
+class MyClass1
+{
+	void display1()
+	{
+		int num=5,den=0;
+		int res=num/den;
+		System.out.println("\n result is "+res);
+
+
+	}
+
+	public static void main(String args[])
+	{
+		MyClass1 mc1=new MyClass1();
+		mc1.display1();
+
+	}
+
+}
+
+here the statement mc1.display1(),will generate a java.lang.ArithmeticException at runtime during execution of statement int res=num/den, but because ArithmeticException is an unchecked exception, so the java compiler will not know at compile time that the statement int res=num/den will generate the ArithmeticException and so we dont get any compiler error for above code though we have not handled nor declared the ArithmeticException in the main() nor the display1() method definition. But at runtime the statement int res=num/den will generfate the ArithmeticException and because it has not been handled because there is no matching try catch block inside display() method definition, so the execution of display1() is terminated immediately after execution of the statement int res=num/den and the ArithmeticException is propogated or transferred to the calling method main() and because there is no matching try catch block i.e. exception handling code in main() definition also so the execution of the main() and finally the pgm execution is abrutly terminated.
+
+So whether an exception is a checked or unchecked exception if there is no matching try catch block to catch and handle the exception inside the method definition body where it occurs then the method execution is abruttly terminated immediately after the exception occurs in that method and control goes to the calling method wnhere the process continues.
+
