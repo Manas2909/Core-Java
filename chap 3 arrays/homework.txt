@@ -1,0 +1,9 @@
+1. accept elements into a 1d array and search whether an element is present in it or not using binary search
+
+2. accept inputs into 2 matrices and multiply them
+
+3. accept inputs into multiple book class objects using array of books and display details of only those books whose book price is greater than 150 and whose book id is between 50 and 100 and also whose book name begins from C or J.
+
+
+4. pass command line input arguments into the args parameter of main method and perform different arithmatic operations on them.
+
