@@ -1,0 +1,125 @@
+Basic Building blocks of java:
+to lean any language we need 3 things:
+alphabets a-z, A-Z
+digits 0-9
+special symbols(they are those special characters of the keyboard apart from alphabets and digits. e.g.all arithmatic operators like +,-, etc. =,(,) etc.)
+
+when we combine alphabets digits and special symbols we get tokens. Tokens are smallest indivisible units of the java pgm which cannot be further subdivided.
+
+There are 3 types of tokens:
+1. keywords:
+keywords are reserved words whose meaning is fixed in the java pgm and cannot be changed in the java pgm. If we try to change the meaning of keywords in java pgm we get compiler error or syntax error.
+
+e.g. of keywords in java:
+class, new,if,else,switch,case,for,while,do while,void, all data types, new etc.
+
+2. Variable:
+Variables are the named RAM memory locations which are used to store input and output values during pgm execution.
+
+Every variable can store or hold values of only a particular data type decided by the data type using which the variables are declared.
+
+Data types in java:
+1. integer
+int(4 bytes)
+short(2  bytes)
+long(8 bytes)
+byte(1 byte)
+
+2. floating
+float(4 bytes)
+double(8 bytes)
+
+3. char(2 bytes)
+
+4. boolean(1 bit)
+
+
+
+RULE:
+If we assign a value or variable of larger data type directly to a variable of smaller data type or smaller size we get a compiler error.
+
+e.g. byte b1=130;
+here 130 is out of range of byte whose range is -128 to +127. so we get a compiler error as per above rule for statement byte b1=130;
+
+to avoid compiler error we need to explicitly convert the data type of 130 into smaller data type byte by rewriting the statement as:
+
+byte b1=(byte)130;
+here we dont get a compiler error but 130 is also not assigned to b1 variable. so the JVM will randomly choose a value which falls in range of byte and assign it to b1 variable.
+
+the above statement byte b1=(byte)130 is called as narrowing conversion or explicit type conversion because we have to mention the conversion of larger value 130 into smaller data type byte explicitly inside the ().
+
+this narrowing or explicit type conversion must be compulsorily done when ever the programmer is trying to assign a value or variable of larger data type to a variable of smaller data type.
+
+
+
+RULE:
+Every floating value in java with a decimal point is considered to be double.
+
+e.g.
+float f1=5.6;
+here 5.6 actually falls in range of float. But since 5.6 contains a decimal point so as per above rule the 5.6 is considered to be of 8 byte double data tyoe and so we get a compiler error for float f1=5.6;
+
+to avoid the compiler error we rewrite the statement as:
+float f1=5.6f;
+
+or
+
+float f1=5.6F;
+
+or
+
+float f1=(float)5.6;
+
+all the 3 above statements, are examples of narrowing conversion of double value 5.6 into smaller type float.
+
+
+float f1=5;
+no compiler error because 5 being integer value without decimal point, is not considered double.
+
+
+
+int m=5;
+double d1=m;
+here m and d1 are not of same data types. But yet we dont get any compiler error nor runtime error for the above statement. This is because JVM will automatically convert the data type of the value of the RHS variable m into double data type i.e. 5.0 and this 5.0 is assigned to d1. This is called implicit type conversion or widening conversion and is done automatically by java compiler at compile time itself and this happens whenever we are assigning a value or variable of smaller data type to a variable of larger data type where the RHS variable or value is also compatable to LHS.
+
+
+
+
+
+char:
+just like in C and C++, in java also, every keyboard character has a fixed unique positive integer value associated with it but in java it is called unicode value and its size is 2 bytes in RAM memory because size of char data type in java is also 2 bytes.
+
+The unicode values of the following keyboard characters are:
+'a'-'z': 97-122
+'A'-'Z': 65-90
+'0'-'9': 48-57
+
+RULE:
+Whenever we store or assign a character value to a variable of char data type, then the actual character value is never stored internally in the 2 byte RAM memory location of the char variable. Instead the unicode value of that assigned character value is stored automatically by JVM in 2 byte binary representation in the RAM memory area of the char variable.
+
+e.g.
+char ch='d';
+here the character value 'd' is assigned to char variable ch. But the actual value stored into the variable ch is not 'd' but the unicode value of 'd' i.e. 100 in 2 byte binary representation in ch variable.
+
+e.g.
+char ch='2';
+here the unicode value of character '2' i.e. 50 is stored internaly in 2 byte RAM memory area of ch variable.
+
+
+
+
+3. Constant:
+Constants are also named RAM memory location but the value of a constant once assigned for the 1st time to it always remains its fixed value throughout the pgm execution. So the value of a constant unlike a variable can never be changed during pgm execution else compiler error. we use the final keyword of java to define constant.
+
+e.g.
+final int m=5;
+here m is defined as a constant of data type int and its fixed value is 5.
+
+m=6;
+we get a compiler error
+
+m=5;
+we get a compiler error because the name of the constant can never be used on LHS of assignment operator.
+
+m+=7 or m++ etc. all give compiler error because value cannot be reassigned to a constant once it is assigned the 1st time.
+
